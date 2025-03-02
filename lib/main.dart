@@ -8,7 +8,7 @@ import 'package:space_x_rocket_launches/theme/app_theme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
-  print(dotenv.env);
+
 
   runApp(const ProviderScope(child: SpaceXApp()));
 }
