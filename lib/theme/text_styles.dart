@@ -25,7 +25,7 @@ class AppTextStyles {
 
   // Large Title TextStyle (Bold and Large)
   static TextStyle largeTitle = TextStyle(
-      fontFamily: AppFonts.bold, fontSize: 32.sp, color: AppColors.darkText);
+      fontFamily: AppFonts.bold, fontSize: 36.sp, color: AppColors.darkText);
 
   // Subheading TextStyle (Medium and slightly smaller)
   static TextStyle subheading = TextStyle(

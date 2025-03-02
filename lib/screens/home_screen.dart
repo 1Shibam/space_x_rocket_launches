@@ -31,9 +31,17 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
         child: Scaffold(
             appBar: PreferredSize(
-                preferredSize: const Size.fromHeight(80.0), child: AppBar()),
+                preferredSize: const Size.fromHeight(80.0),
+                child: AppBar(
+                  title: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Text(
+                        'Space-X',
+                        style: Theme.of(context).textTheme.headlineLarge,
+                      )),
+                  centerTitle: true,
+                )),
             bottomNavigationBar: BottomNavigationBar(
-              backgroundColor: Theme.of(context).primaryColor,
               currentIndex: selectPage,
               onTap: (value) {
                 onItemTapped(value);
@@ -41,11 +49,11 @@ class _HomeScreenState extends State<HomeScreen> {
               items: const <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                   icon: Icon(Icons.search),
-                  label: 'Search',
+                  label: 'Launches',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.details),
-                  label: 'detail',
+                  label: 'Rockets',
                 ),
               ],
             ),
