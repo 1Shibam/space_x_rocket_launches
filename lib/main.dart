@@ -20,9 +20,9 @@ class SpaceXApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp.router(
           title: 'SpaceX Launches',
-          theme: AppTheme.lightTheme,
-          darkTheme: AppTheme.darkTheme,
-          themeMode: ThemeMode.system,
+          theme: appTheme,
+         
+          
           debugShowCheckedModeBanner: false,
           routerConfig: appRouter,
         );

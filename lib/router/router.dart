@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:space_x_rocket_launches/screens/home_screen.dart';
 import 'package:space_x_rocket_launches/screens/splash_screen.dart';
 
 GoRouter appRouter = GoRouter(initialLocation: '/', routes: [
@@ -24,7 +25,7 @@ GoRouter appRouter = GoRouter(initialLocation: '/', routes: [
   pageBuilder: (context, state) {
     return CustomTransitionPage(
       key: state.pageKey,
-      child: const SplashScreen(),
+      child: const HomeScreen(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return FadeTransition(
           opacity:
