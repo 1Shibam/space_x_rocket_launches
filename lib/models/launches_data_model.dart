@@ -2,6 +2,7 @@
 
 import 'package:meta/meta.dart';
 
+//launches data model
 @immutable
 class LaunchesDataModel {
   final int flightNumber;
