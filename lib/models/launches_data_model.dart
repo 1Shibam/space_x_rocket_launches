@@ -1,5 +1,3 @@
-// !!Show basic launch information (mission name, date, rocket used, success status)
-
 import 'package:meta/meta.dart';
 
 //launches data model
@@ -42,14 +40,14 @@ class LaunchesDataModel {
   factory LaunchesDataModel.fromDBMap(Map<String, dynamic> map) {
     return LaunchesDataModel(
         launchID: map['launchID'] as int?,
-        flightNumber: map[''],
-        videoSource: map[''],
-        articleSoruce: map[''],
-        wikipediaSource: map[''],
-        missionName: map[''],
-        rocket: map[''],
-        landingDate: map[''],
-        successStatus: map['']);
+        flightNumber: map['flightNumber'],
+        videoSource: map['videoSource'],
+        articleSoruce: map['articleSoruce'],
+        wikipediaSource: map['wikipediaSource'],
+        missionName: map['missionName'],
+        rocket: map['rocket'],
+        landingDate: map['landingDate'],
+        successStatus: map['successStatus']);
   }
   Map<String, dynamic> toJson() {
     return {
