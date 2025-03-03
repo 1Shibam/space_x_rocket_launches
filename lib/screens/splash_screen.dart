@@ -10,15 +10,13 @@ class SplashScreen extends StatelessWidget {
     Future.delayed(const Duration(seconds: 2), () {
       if (context.mounted) context.go(RouterName.home);
     });
-    return const Scaffold(
+    return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircularProgressIndicator(
-              color: Colors.blue,
-            ),
-            Text('Loading'),
+            Image.asset('assets/animation/rocket.gif'),
+            const Text('Loading'),
           ],
         ),
       ),
