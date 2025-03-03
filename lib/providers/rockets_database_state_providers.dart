@@ -6,10 +6,10 @@ class RocketsDatabaseStateNotifier
     extends StateNotifier<AsyncValue<List<RocketsDataModel>>> {
   final Ref ref;
   RocketsDatabaseStateNotifier(this.ref) : super(const AsyncValue.loading()) {
-    fetchRocketsFromDataBase();
+    fetchRocketsListFromDataBase();
   }
 
-  Future<void> fetchRocketsFromDataBase() async {
+  Future<void> fetchRocketsListFromDataBase() async {
     try {
       state = const AsyncValue.loading();
       final rocketDBService =
