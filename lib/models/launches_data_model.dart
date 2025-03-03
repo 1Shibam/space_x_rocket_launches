@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 //launches data model
 @immutable
 class LaunchesDataModel {
+  final int? launchID;
   final int flightNumber;
   final String videoSource;
   final String articleSoruce;
@@ -15,7 +16,8 @@ class LaunchesDataModel {
   final bool successStatus;
 
   const LaunchesDataModel(
-      {required this.flightNumber,
+      {this.launchID,
+      required this.flightNumber,
       required this.videoSource,
       required this.articleSoruce,
       required this.wikipediaSource,
@@ -35,6 +37,19 @@ class LaunchesDataModel {
         rocket: json['rocket'] ?? '',
         landingDate: json['date_utc'] ?? '',
         successStatus: json['success'] ?? false);
+  }
+
+  factory LaunchesDataModel.fromDBMap(Map<String, dynamic> map) {
+    return LaunchesDataModel(
+        launchID: map['launchID'] as int?,
+        flightNumber: map[''],
+        videoSource: map[''],
+        articleSoruce: map[''],
+        wikipediaSource: map[''],
+        missionName: map[''],
+        rocket: map[''],
+        landingDate: map[''],
+        successStatus: map['']);
   }
   Map<String, dynamic> toJson() {
     return {
