@@ -10,8 +10,9 @@ class LaunchesListNotifer
   final SpaceXServices services;
 
   Future<void> fetchLaunchesList() async {
+    state = const AsyncValue.loading();
+    print('provider is triggering!!');
     try {
-      state = const AsyncValue.loading();
       final launches = await services.getLaunchesList();
       state = AsyncValue.data(launches);
     } catch (error, stackTrace) {

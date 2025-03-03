@@ -28,13 +28,13 @@ class LaunchesDataModel {
     //might get null values --
     return LaunchesDataModel(
         flightNumber: json['flight_number'] ?? 0,
-        videoSource: json['webcast'] ?? '',
-        articleSoruce: json['article'] ?? '',
-        wikipediaSource: json["wikipedia"] ?? '',
+        videoSource: json['links']['webcast'] ?? '',
+        articleSoruce: json['links']['article'] ?? '',
+        wikipediaSource: json['links']["wikipedia"] ?? '',
         missionName: json['name'] ?? '',
         rocket: json['rocket'] ?? '',
         landingDate: json['date_utc'] ?? '',
-        successStatus: json['success'] ?? '');
+        successStatus: json['success'] ?? false);
   }
   Map<String, dynamic> toJson() {
     return {

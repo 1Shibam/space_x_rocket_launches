@@ -47,13 +47,13 @@ class RocketsDataModel {
         country: json['country'] ?? '',
         wikipediaSource: json['wikipedia'] ?? '',
         description: json['description'] ?? '',
-        imageSources: json['flickr_images'] ?? [],
-        heightInMeters: json['height']['meters'].toDouble() ?? 0,
-        heightInFeets: json['height']['feet'].toDouble() ?? 0,
-        diameterInMeter: json['diameter']['meters'].toDouble() ?? 0,
-        diameterInFeets: json['diameter']['feet'].toDouble() ?? 0,
-        massInKg: json['mass']['kg'].toDouble() ?? 0,
-        massInLbs: json['mass']['lb'].toDouble() ?? 0);
+        imageSources: (json['flickr_images'] as List<dynamic>?)?.cast<String>() ?? [],
+        heightInMeters: (json['height']['meters'] as num?)?.toDouble() ?? 0,
+        heightInFeets: (json['height']['feet'] as num?)?.toDouble() ?? 0,
+        diameterInMeter: (json['diameter']['meters'] as num?)?.toDouble() ?? 0,
+        diameterInFeets: (json['diameter']['feet'] as num?)?.toDouble() ?? 0,
+        massInKg: (json['mass']['kg'] as num?)?.toDouble() ?? 0,
+        massInLbs: (json['mass']['lb'] as num?)?.toDouble() ?? 0);
   }
   Map<String, dynamic> toJson() {
     return {
