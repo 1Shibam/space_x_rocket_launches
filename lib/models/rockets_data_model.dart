@@ -3,6 +3,7 @@ import 'package:meta/meta.dart';
 // rockets data model
 @immutable
 class RocketsDataModel {
+  final int? rocketID;
   final String rocketName;
   final bool activeStatus;
   final int costPerLaunch;
@@ -11,7 +12,7 @@ class RocketsDataModel {
   final String country;
   final String wikipediaSource;
   final String description;
-  final List<String> imageSources;
+
   final double heightInMeters;
   final double heightInFeets;
   final double diameterInMeter;
@@ -20,7 +21,8 @@ class RocketsDataModel {
   final double massInLbs;
 
   const RocketsDataModel(
-      {required this.rocketName,
+      {this.rocketID,
+      required this.rocketName,
       required this.activeStatus,
       required this.costPerLaunch,
       required this.successRate,
@@ -28,7 +30,6 @@ class RocketsDataModel {
       required this.country,
       required this.wikipediaSource,
       required this.description,
-      required this.imageSources,
       required this.heightInMeters,
       required this.heightInFeets,
       required this.diameterInMeter,
@@ -47,13 +48,31 @@ class RocketsDataModel {
         country: json['country'] ?? '',
         wikipediaSource: json['wikipedia'] ?? '',
         description: json['description'] ?? '',
-        imageSources: (json['flickr_images'] as List<dynamic>?)?.cast<String>() ?? [],
         heightInMeters: (json['height']['meters'] as num?)?.toDouble() ?? 0,
         heightInFeets: (json['height']['feet'] as num?)?.toDouble() ?? 0,
         diameterInMeter: (json['diameter']['meters'] as num?)?.toDouble() ?? 0,
         diameterInFeets: (json['diameter']['feet'] as num?)?.toDouble() ?? 0,
         massInKg: (json['mass']['kg'] as num?)?.toDouble() ?? 0,
         massInLbs: (json['mass']['lb'] as num?)?.toDouble() ?? 0);
+  }
+
+  factory RocketsDataModel.fromDataBaseMap(Map<String, dynamic> map) {
+    return RocketsDataModel(
+        rocketID: map['rocketID'] as int?,
+        rocketName: map['rocketName'],
+        activeStatus: map['activeStatus'],
+        costPerLaunch: map['costPerLaunch'],
+        successRate: map['successRate'],
+        firstLaunch: map['firstLaunch'],
+        country: map['country'],
+        wikipediaSource: map['wikipediaSource'],
+        description: map['description'],
+        heightInMeters: map['heightInMeters'],
+        heightInFeets: map['heightInFeets'],
+        diameterInMeter: map['diameterInMeter'],
+        diameterInFeets: map['diameterInFeets'],
+        massInKg: map['massInKg'],
+        massInLbs: map['massInLbs']);
   }
   Map<String, dynamic> toJson() {
     return {
@@ -65,7 +84,6 @@ class RocketsDataModel {
       'country': country,
       'wikipedia': wikipediaSource,
       'description': description,
-      'flickr_images': imageSources,
       'height': {'meters': heightInMeters, 'feet': heightInFeets},
       'diameter': {'meters': diameterInMeter, 'feet': diameterInFeets},
       'mass': {'kg': massInKg, 'lb': massInLbs}
