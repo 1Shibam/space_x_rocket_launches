@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:space_x_rocket_launches/screens/launches_list_page.dart';
 import 'package:space_x_rocket_launches/screens/rockets_list_page.dart';
+import 'package:space_x_rocket_launches/theme/app_colors.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -31,24 +32,85 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
         child: Scaffold(
             appBar: PreferredSize(
-                preferredSize: const Size.fromHeight(80.0),
+                preferredSize: const Size.fromHeight(60.0),
                 child: AppBar(
                   leading: Builder(
                     builder: (context) => IconButton(
                         onPressed: () {
                           Scaffold.of(context).openDrawer();
                         },
-                        icon: Icon(Icons.menu)),
+                        icon: const Icon(Icons.menu)),
                   ),
-                  title: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Text(
-                        'Space-X',
-                        style: Theme.of(context).textTheme.headlineLarge,
-                      )),
+                  title: Text(
+                    'Space-X',
+                    style: Theme.of(context).textTheme.headlineLarge,
+                  ),
                   centerTitle: true,
                 )),
-            drawer: const Drawer(),
+            drawer: Drawer(
+              backgroundColor: AppColors.darkAccent,
+              child: ListView(
+                children: [
+                  DrawerHeader(
+                      child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Text(
+                      'Menu',
+                      style: Theme.of(context).textTheme.headlineLarge,
+                    ),
+                  )),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ListTile(
+                        leading: const Icon(
+                          Icons.bookmark,
+                          color: AppColors.darkText,
+                        ),
+                        title: Text(
+                          'Launches',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                      ),
+                      ListTile(
+                        leading: const Icon(
+                          Icons.bookmark,
+                          color: AppColors.darkText,
+                        ),
+                        title: Text(
+                          'Rockets',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                      ),
+                      ListTile(
+                        leading: const Icon(
+                          Icons.info,
+                          color: AppColors.darkText,
+                        ),
+                        title: Text(
+                          'About',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                      ),
+                      ListTile(
+                        leading: const Icon(
+                          Icons.source,
+                          color: AppColors.darkText,
+                        ),
+                        title: Row(
+                          children: [
+                            Text(
+                              'Source-Code',
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: selectPage,
               onTap: (value) {
@@ -60,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   label: 'Launches',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.details),
+                  icon: Icon(Icons.rocket),
                   label: 'Rockets',
                 ),
               ],
