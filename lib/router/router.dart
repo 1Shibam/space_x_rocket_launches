@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:space_x_rocket_launches/screens/home_screen.dart';
 import 'package:space_x_rocket_launches/screens/splash_screen.dart';
+import 'package:space_x_rocket_launches/widgets/launches_detail_screen.dart';
 
 GoRouter appRouter = GoRouter(initialLocation: '/', routes: [
   GoRoute(
@@ -36,4 +37,6 @@ GoRouter appRouter = GoRouter(initialLocation: '/', routes: [
     );
   },
 ),
+ 
+ 
 ]);

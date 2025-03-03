@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:space_x_rocket_launches/providers/launches_list_provider.dart';
 import 'package:space_x_rocket_launches/theme/app_colors.dart';
 import 'package:space_x_rocket_launches/widgets/custom_tile_widget.dart';
+import 'package:space_x_rocket_launches/widgets/launches_detail_screen.dart';
 
 class LaunchesListPage extends StatelessWidget {
   const LaunchesListPage({super.key});
@@ -58,6 +59,16 @@ class LaunchesListPage extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   final singleLaunch = launchData[index];
                                   return CustomListTileWidget(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  LaunchesDetailScreen(
+                                                      launchesDataModel:
+                                                          singleLaunch),
+                                            ));
+                                      },
                                       title: 'Mission name',
                                       name: singleLaunch.missionName);
                                 },

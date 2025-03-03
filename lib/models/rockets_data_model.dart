@@ -4,6 +4,7 @@ import 'package:meta/meta.dart';
 @immutable
 class RocketsDataModel {
   final int? rocketID;
+  final String id;
   final String rocketName;
   final bool activeStatus;
   final int costPerLaunch;
@@ -12,8 +13,6 @@ class RocketsDataModel {
   final String country;
   final String wikipediaSource;
   final String description;
-  final String rocket;
-
   final double heightInMeters;
   final double heightInFeets;
   final double diameterInMeter;
@@ -23,7 +22,7 @@ class RocketsDataModel {
 
   const RocketsDataModel(
       {this.rocketID,
-      required this.rocket,
+      required this.id,
       required this.rocketName,
       required this.activeStatus,
       required this.costPerLaunch,
@@ -42,7 +41,7 @@ class RocketsDataModel {
   factory RocketsDataModel.fromJson(Map<String, dynamic> json) {
     // may get null values --
     return RocketsDataModel(
-        rocket: json['id'] ?? '',
+        id: json['id'] ?? '',
         rocketName: json['name'] ?? '',
         activeStatus: json['active'] ?? false,
         costPerLaunch: json['cost_per_launch'] ?? 0,
@@ -58,28 +57,9 @@ class RocketsDataModel {
         massInKg: (json['mass']['kg'] as num?)?.toDouble() ?? 0,
         massInLbs: (json['mass']['lb'] as num?)?.toDouble() ?? 0);
   }
-
-  factory RocketsDataModel.fromDataBaseMap(Map<String, dynamic> map) {
-    return RocketsDataModel(
-        rocketID: map['rocketID'] as int?,
-        rocket: map['rocket'],
-        rocketName: map['rocketName'],
-        activeStatus: map['activeStatus'],
-        costPerLaunch: map['costPerLaunch'],
-        successRate: map['successRate'],
-        firstLaunch: map['firstLaunch'],
-        country: map['country'],
-        wikipediaSource: map['wikipediaSource'],
-        description: map['description'],
-        heightInMeters: map['heightInMeters'],
-        heightInFeets: map['heightInFeets'],
-        diameterInMeter: map['diameterInMeter'],
-        diameterInFeets: map['diameterInFeets'],
-        massInKg: map['massInKg'],
-        massInLbs: map['massInLbs']);
-  }
   Map<String, dynamic> toJson() {
     return {
+      'id' : id,
       'name': rocketName,
       'active': activeStatus,
       'cost_per_launch': costPerLaunch,
