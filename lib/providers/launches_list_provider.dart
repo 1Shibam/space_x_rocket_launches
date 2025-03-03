@@ -7,7 +7,7 @@ class LaunchesListNotifer
   LaunchesListNotifer(this.services) : super(const AsyncValue.loading()) {
     fetchLaunchesList();
   }
-  SpaceXServices services;
+  final SpaceXServices services;
 
   Future<void> fetchLaunchesList() async {
     try {
