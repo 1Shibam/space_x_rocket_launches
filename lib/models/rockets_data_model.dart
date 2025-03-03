@@ -12,6 +12,7 @@ class RocketsDataModel {
   final String country;
   final String wikipediaSource;
   final String description;
+  final String rocket;
 
   final double heightInMeters;
   final double heightInFeets;
@@ -22,6 +23,7 @@ class RocketsDataModel {
 
   const RocketsDataModel(
       {this.rocketID,
+      required this.rocket,
       required this.rocketName,
       required this.activeStatus,
       required this.costPerLaunch,
@@ -40,6 +42,7 @@ class RocketsDataModel {
   factory RocketsDataModel.fromJson(Map<String, dynamic> json) {
     // may get null values --
     return RocketsDataModel(
+        rocket: json['id'] ?? '',
         rocketName: json['name'] ?? '',
         activeStatus: json['active'] ?? false,
         costPerLaunch: json['cost_per_launch'] ?? 0,
@@ -59,6 +62,7 @@ class RocketsDataModel {
   factory RocketsDataModel.fromDataBaseMap(Map<String, dynamic> map) {
     return RocketsDataModel(
         rocketID: map['rocketID'] as int?,
+        rocket: map['rocket'],
         rocketName: map['rocketName'],
         activeStatus: map['activeStatus'],
         costPerLaunch: map['costPerLaunch'],

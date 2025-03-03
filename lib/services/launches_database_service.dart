@@ -14,6 +14,7 @@ class LaunchesDatabaseService {
       await database.insert('launchesTable', launch.toJson(),
           conflictAlgorithm: ConflictAlgorithm.replace);
     } catch (error, stackTrace) {
+      debugPrint('Error adding the laucnhes - $error');
       debugPrintStack(stackTrace: stackTrace);
       rethrow;
     }
@@ -26,6 +27,7 @@ class LaunchesDatabaseService {
           await database.query('launchesTable');
       return launches.map((data) => LaunchesDataModel.fromDBMap(data)).toList();
     } catch (error, stackTrace) {
+      debugPrint('Error fetching the Launches list - $error');
       debugPrintStack(stackTrace: stackTrace);
       return [];
     }
@@ -37,6 +39,7 @@ class LaunchesDatabaseService {
       return await database.delete('launchesTable',
           where: 'launchID = ?', whereArgs: [launchID]);
     } catch (error, stackTrace) {
+      debugPrint('Error deleting the lauches - $error');
       debugPrintStack(stackTrace: stackTrace);
       return 0;
     }

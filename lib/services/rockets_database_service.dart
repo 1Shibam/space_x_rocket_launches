@@ -11,6 +11,7 @@ class RocketsDatabaseService {
     try {
       await database.insert('rocketsTable', rocket.toJson());
     } catch (error, stackTrace) {
+      debugPrint('error adding rocket - $error');
       debugPrintStack(stackTrace: stackTrace);
     }
   }
@@ -18,11 +19,12 @@ class RocketsDatabaseService {
   //? fetch the list of rockets in database -
   Future<List<RocketsDataModel>> getListOfRocketsFromDB() async {
     try {
-      final rockets = await database.query('launchesTable');
+      final rockets = await database.query('rocketsTable');
       return rockets
           .map((data) => RocketsDataModel.fromDataBaseMap(data))
           .toList();
     } catch (error, stackTrace) {
+      debugPrint('Error fetching list of rocket - $error');
       debugPrintStack(stackTrace: stackTrace);
       return [];
     }
@@ -34,6 +36,7 @@ class RocketsDatabaseService {
       return await database
           .delete('rocketsTable', where: 'rocketID = ?', whereArgs: [rocketID]);
     } catch (error, stackTrace) {
+      debugPrint('Error deleting the rocket - $error');
       debugPrintStack(stackTrace: stackTrace);
       return 0;
     }
