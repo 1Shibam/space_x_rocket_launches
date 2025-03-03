@@ -21,15 +21,25 @@ class LaunchesDatabaseService {
 
   //? Fetches the list of launches saved in the database
   Future<List<LaunchesDataModel>> getListOfLaunchesFromDB() async {
-    final List<Map<String, dynamic>> launches =
-        await database.query('launchesTable');
-    return launches.map((data) => LaunchesDataModel.fromDBMap(data)).toList();
+    try {
+      final List<Map<String, dynamic>> launches =
+          await database.query('launchesTable');
+      return launches.map((data) => LaunchesDataModel.fromDBMap(data)).toList();
+    } catch (error, stackTrace) {
+      debugPrintStack(stackTrace: stackTrace);
+      return [];
+    }
   }
 
   //? delete the saved launches from the database
   Future<int> deleteLaunchFromDB(int launchID) async {
-    return await database
-        .delete('launchesTable', where: 'launchID = ?', whereArgs: [launchID]);
+    try {
+      return await database.delete('launchesTable',
+          where: 'launchID = ?', whereArgs: [launchID]);
+    } catch (error, stackTrace) {
+      debugPrintStack(stackTrace: stackTrace);
+      return 0;
+    }
   }
 }
 
