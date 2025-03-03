@@ -9,13 +9,23 @@ ThemeData get appTheme => ThemeData(
     bottomAppBarTheme: const BottomAppBarTheme(
       color: AppColors.darkPrimary,
     ),
+    iconTheme: IconThemeData(
+      color: AppColors.darkText,
+      size: 30.sp,
+    ),
+    iconButtonTheme: IconButtonThemeData(
+        style: ButtonStyle(
+            alignment: Alignment.center,
+            iconColor: const WidgetStatePropertyAll(AppColors.darkText),
+            iconSize: WidgetStatePropertyAll(36.sp))),
     textTheme: TextTheme(
       headlineLarge: AppTextStyles.largeTitle,
       headlineMedium: AppTextStyles.largeTitle.copyWith(fontSize: 28.sp),
       headlineSmall: AppTextStyles.largeTitle.copyWith(fontSize: 24.sp),
       bodyLarge: AppTextStyles.medium.copyWith(fontSize: 24.sp),
       bodyMedium: AppTextStyles.medium,
-      bodySmall: AppTextStyles.medium.copyWith(fontSize: 16.sp),
+      bodySmall: AppTextStyles.medium
+          .copyWith(fontSize: 16.sp, color: AppColors.darkSubText),
       displayLarge: AppTextStyles.regular.copyWith(fontSize: 24.sp),
       displayMedium: AppTextStyles.regular.copyWith(fontSize: 20.sp),
       displaySmall: AppTextStyles.regular,

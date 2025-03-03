@@ -11,7 +11,7 @@ class LaunchesListNotifer
 
   Future<void> fetchLaunchesList() async {
     state = const AsyncValue.loading();
-    print('provider is triggering!!');
+    // print('provider is triggering!!');
     try {
       final launches = await services.getLaunchesList();
       state = AsyncValue.data(launches);
