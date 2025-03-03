@@ -58,6 +58,7 @@ class LaunchesListPage extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   final singleLaunch = launchData[index];
                                   return CustomListTileWidget(
+                                      title: 'Mission name',
                                       name: singleLaunch.missionName);
                                 },
                               ),

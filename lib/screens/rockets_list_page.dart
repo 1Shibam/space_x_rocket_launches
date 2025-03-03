@@ -26,7 +26,9 @@ class RocketsListPage extends ConsumerWidget {
                       itemBuilder: (context, index) {
                         final singleRocket = rocketData[index];
                         return CustomListTileWidget(
-                            name: singleRocket.rocketName);
+                          name: singleRocket.rocketName,
+                          title: 'Rocket Name',
+                        );
                       },
                     ),
                   );
