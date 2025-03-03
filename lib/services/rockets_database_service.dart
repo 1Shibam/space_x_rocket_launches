@@ -1,3 +1,41 @@
+import 'package:flutter/material.dart';
+import 'package:space_x_rocket_launches/models/rockets_data_model.dart';
+import 'package:sqflite/sqflite.dart';
+
 class RocketsDatabaseService {
-  
+  final Database database;
+  RocketsDatabaseService(this.database);
+
+  //? add data to the rockets Database
+  Future<void> addToRocketsDB(RocketsDataModel rocket) async {
+    try {
+      await database.insert('rocketsTable', rocket.toJson());
+    } catch (error, stackTrace) {
+      debugPrintStack(stackTrace: stackTrace);
+    }
+  }
+
+  //? fetch the list of rockets in database -
+  Future<List<RocketsDataModel>> getListOfRocketsFromDB() async {
+    try {
+      final rockets = await database.query('launchesTable');
+      return rockets
+          .map((data) => RocketsDataModel.fromDataBaseMap(data))
+          .toList();
+    } catch (error, stackTrace) {
+      debugPrintStack(stackTrace: stackTrace);
+      return [];
+    }
+  }
+
+  //? delete the rockets data -
+  Future<int> deleteRocketsFromDB(int rocketID) async {
+    try {
+      return await database
+          .delete('rocketsTable', where: 'rocketID = ?', whereArgs: [rocketID]);
+    } catch (error, stackTrace) {
+      debugPrintStack(stackTrace: stackTrace);
+      return 0;
+    }
+  }
 }
