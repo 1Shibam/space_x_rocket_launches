@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:space_x_rocket_launches/database/rockets_database.dart';
 import 'package:space_x_rocket_launches/models/rockets_data_model.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -42,3 +44,9 @@ class RocketsDatabaseService {
     }
   }
 }
+
+final rocketsDatabaseServiceProvier =
+    FutureProvider<RocketsDatabaseService>((ref) async {
+  final rocketsDB = await ref.watch(rocketDataBaseProvider.future);
+  return RocketsDatabaseService(rocketsDB);
+});
