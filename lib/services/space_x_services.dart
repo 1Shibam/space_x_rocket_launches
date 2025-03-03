@@ -32,14 +32,14 @@ class SpaceXServices {
   Future<List<RocketsDataModel>> getRocketsList() async {
     try {
       final response = await dio.get('/rockets');
-      print("okay you got the response $response");
+
       if (response.statusCode == 200) {
         final List<Map<String, dynamic>> data =
             List<Map<String, dynamic>>.from(response.data);
-        print(" great you got the data $data");
+
         final result =
             data.map((json) => RocketsDataModel.fromJson(json)).toList();
-        print('greate you got the result too - $result');
+
         return result;
       } else {
         return [];

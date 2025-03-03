@@ -33,6 +33,13 @@ class _HomeScreenState extends State<HomeScreen> {
             appBar: PreferredSize(
                 preferredSize: const Size.fromHeight(80.0),
                 child: AppBar(
+                  leading: Builder(
+                    builder: (context) => IconButton(
+                        onPressed: () {
+                          Scaffold.of(context).openDrawer();
+                        },
+                        icon: Icon(Icons.menu)),
+                  ),
                   title: Align(
                       alignment: Alignment.bottomCenter,
                       child: Text(
@@ -41,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       )),
                   centerTitle: true,
                 )),
+            drawer: const Drawer(),
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: selectPage,
               onTap: (value) {
