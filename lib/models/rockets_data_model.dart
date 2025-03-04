@@ -79,41 +79,41 @@ class RocketsDataModel {
   factory RocketsDataModel.fromDBMap(Map<String, dynamic> map) {
     return RocketsDataModel(
         rocketID: map['rocketID'] as int?,
-        id: map['id'],
-        rocketName: map['rocketName'],
+        id: map['id'] ?? '',
+        rocketName: map['rocketName'] ?? '',
         activeStatus: map['activeStatus'] == 1,
-        costPerLaunch: map['costPerLaunch'],
-        successRate: map['successRate'],
-        firstLaunch: map['firstLaunch'],
-        country: map['country'],
-        wikipediaSource: map['wikipediaSource'],
-        description: map['description'],
-        heightInMeters: map['heightInMeters'],
-        heightInFeets: map['heightInFeets'],
-        diameterInMeter: map['diameterInMeter'],
-        diameterInFeets: map['diameterInFeets'],
-        massInKg: map['massInKg'],
-        massInLbs: map['massInLbs']);
+        costPerLaunch: map['costPerLaunch'] ?? '',
+        successRate: map['successRate'] ?? 0,
+        firstLaunch: map['firstLaunch'] ?? '',
+        country: map['country'] ?? '',
+        wikipediaSource: map['wikipediaSource'] ?? '',
+        description: map['description'] ?? 0,
+        heightInMeters: map['heightInMeters'] ?? 0.0,
+        heightInFeets: map['heightInFeets'] ?? 0.0,
+        diameterInMeter: map['diameterInMeter'] ?? 0.0,
+        diameterInFeets: map['diameterInFeets'] ?? 0.0,
+        massInKg: map['massInKg'] ?? 0.0,
+        massInLbs: map['massInLbs'] ?? 0.0);
   }
 
   //to db map method -
   Map<String, dynamic> toDBMap() {
     return {
-      'id' : id,
+      'id': id,
       'rocketName': rocketName,
-      'activeStatus' : activeStatus ? 1:0,
-      'costPerLaunch' : costPerLaunch,
+      'activeStatus': activeStatus ? 1 : 0,
+      'costPerLaunch': costPerLaunch,
+      'successRate': successRate,
       'firstLaunch': firstLaunch,
-      'country' : country,
-      'wikipediaSource' : wikipediaSource,
+      'country': country,
+      'wikipediaSource': wikipediaSource,
       'description': description,
-      'heightInMeters' : heightInMeters,
-      'heightInFeets' : heightInFeets,
+      'heightInMeters': heightInMeters,
+      'heightInFeets': heightInFeets,
       'diameterInMeter': diameterInMeter,
       'diameterInFeets': diameterInFeets,
       'massInKg': massInKg,
-      'massInLbs' : massInLbs
+      'massInLbs': massInLbs
     };
   }
 }
-

@@ -7,6 +7,8 @@ import 'package:space_x_rocket_launches/providers/rockets_database_state_provide
 import 'package:space_x_rocket_launches/theme/app_colors.dart';
 import 'package:space_x_rocket_launches/widgets/url_icon_button.dart';
 
+import 'build_tile.dart';
+
 class RocketDetailScreen extends ConsumerStatefulWidget {
   const RocketDetailScreen({super.key, required this.rocket});
   final RocketsDataModel rocket;
@@ -86,7 +88,7 @@ class _RocketDetailScreenState extends ConsumerState<RocketDetailScreen> {
                           widget.rocket.activeStatus ? "Active" : 'Inactive'),
                 ),
                 UrlIconButton(
-                    imageUrl: 'assets/images/wikipedia copy.svg',
+                    imageUrl: 'imageUrl',
                     link: widget.rocket.wikipediaSource,
                     title: 'Wikipedia Source'),
                 BuildTile(
@@ -132,33 +134,6 @@ class _RocketDetailScreenState extends ConsumerState<RocketDetailScreen> {
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class BuildTile extends StatelessWidget {
-  const BuildTile({super.key, required this.title, required this.subtitle});
-
-  final String title;
-  final String subtitle;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 4.w),
-      child: ListTile(
-        tileColor: AppColors.darkAccent,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.r)),
-        title: Text(
-          title,
-          style: Theme.of(context).textTheme.labelLarge,
-        ),
-        subtitle: Text(
-          subtitle,
-          style: Theme.of(context).textTheme.bodyMedium,
         ),
       ),
     );

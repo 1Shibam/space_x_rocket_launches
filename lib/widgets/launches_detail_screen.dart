@@ -5,7 +5,8 @@ import 'package:space_x_rocket_launches/models/launches_data_model.dart';
 import 'package:space_x_rocket_launches/providers/launches_database_state_providers.dart';
 import 'package:space_x_rocket_launches/providers/rockets_list_provider.dart';
 import 'package:space_x_rocket_launches/theme/app_colors.dart';
-import 'package:space_x_rocket_launches/widgets/rockets_detail_screen.dart';
+import 'package:space_x_rocket_launches/widgets/build_tile.dart';
+
 import 'package:space_x_rocket_launches/widgets/url_icon_button.dart';
 
 class LaunchesDetailScreen extends ConsumerWidget {

@@ -16,28 +16,37 @@ class LaunchesListPage extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 8.w),
       child: Column(
         children: [
-          SizedBox(
-            height: 20.h,
-          ),
-          SearchBar(
-            elevation: const WidgetStatePropertyAll(20),
-            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.r))),
-            hintText: 'Search mission',
-            hintStyle: WidgetStatePropertyAll(
-                Theme.of(context).textTheme.headlineSmall),
-            constraints: BoxConstraints.tight(Size(400.w, 64.h)),
-            backgroundColor: WidgetStateProperty.all(AppColors.darkAccent),
-            trailing: [
-              IconButton(onPressed: () {}, icon: const Icon(Icons.search))
-            ],
-          ),
-          SizedBox(
-            height: 16.h,
-          ),
-          const Divider(),
-          SizedBox(
-            height: 16.h,
+          Container(
+            width: double.infinity,
+            color: AppColors.darkBackground,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20.h,
+                ),
+                SearchBar(
+                  elevation: const WidgetStatePropertyAll(20),
+                  shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.r))),
+                  hintText: 'Search mission',
+                  hintStyle: WidgetStatePropertyAll(
+                      Theme.of(context).textTheme.headlineSmall),
+                  constraints: BoxConstraints.tight(Size(400.w, 64.h)),
+                  backgroundColor:
+                      WidgetStateProperty.all(AppColors.darkAccent),
+                  trailing: [
+                    IconButton(onPressed: () {}, icon: const Icon(Icons.search))
+                  ],
+                ),
+                SizedBox(
+                  height: 16.h,
+                ),
+                const Divider(),
+                SizedBox(
+                  height: 16.h,
+                ),
+              ],
+            ),
           ),
           Expanded(
             child: Consumer(

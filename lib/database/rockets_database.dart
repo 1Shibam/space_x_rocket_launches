@@ -35,3 +35,23 @@ final rocketDataBaseProvider = FutureProvider<Database>((ref) async {
     },
   );
 });
+/*
+return {
+      'id' : id,
+      'rocketName': rocketName,
+      'activeStatus' : activeStatus ? 1:0,
+      'costPerLaunch' : costPerLaunch,
+      'successRate' : successRate,
+      'firstLaunch': firstLaunch,
+      'country' : country,
+      'wikipediaSource' : wikipediaSource,
+      'description': description,
+      'heightInMeters' : heightInMeters,
+      'heightInFeets' : heightInFeets,
+      'diameterInMeter': diameterInMeter,
+      'diameterInFeets': diameterInFeets,
+      'massInKg': massInKg,
+      'massInLbs' : massInLbs
+    };
+  }
+ */

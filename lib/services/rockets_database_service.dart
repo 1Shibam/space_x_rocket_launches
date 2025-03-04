@@ -11,7 +11,8 @@ class RocketsDatabaseService {
   //? add data to the rockets Database
   Future<void> addToRocketsDB(RocketsDataModel rocket) async {
     try {
-      await database.insert('rocketsTable', rocket.toJson());
+      print('adding borhter');
+      await database.insert('rocketsTable', rocket.toDBMap());
     } catch (error, stackTrace) {
       debugPrint('error adding rocket - $error');
       debugPrintStack(stackTrace: stackTrace);
@@ -22,9 +23,7 @@ class RocketsDatabaseService {
   Future<List<RocketsDataModel>> getListOfRocketsFromDB() async {
     try {
       final rockets = await database.query('rocketsTable');
-      return rockets
-          .map((data) => RocketsDataModel.fromDBMap(data))
-          .toList();
+      return rockets.map((data) => RocketsDataModel.fromDBMap(data)).toList();
     } catch (error, stackTrace) {
       debugPrint('Error fetching list of rocket - $error');
       debugPrintStack(stackTrace: stackTrace);
@@ -43,7 +42,6 @@ class RocketsDatabaseService {
       return 0;
     }
   }
-  
 }
 
 final rocketsDatabaseServiceProvier =
