@@ -9,15 +9,15 @@ import 'package:space_x_rocket_launches/widgets/url_icon_button.dart';
 
 import 'build_tile.dart';
 
-class RocketDetailScreen extends ConsumerStatefulWidget {
+class RocketDetailScreen extends StatefulWidget {
   const RocketDetailScreen({super.key, required this.rocket});
   final RocketsDataModel rocket;
 
   @override
-  ConsumerState<RocketDetailScreen> createState() => _RocketDetailScreenState();
+  State<RocketDetailScreen> createState() => _RocketDetailScreenState();
 }
 
-class _RocketDetailScreenState extends ConsumerState<RocketDetailScreen> {
+class _RocketDetailScreenState extends State<RocketDetailScreen> {
   bool isMetric = true;
 
   @override
@@ -42,15 +42,20 @@ class _RocketDetailScreenState extends ConsumerState<RocketDetailScreen> {
                         color: AppColors.darkText,
                         size: 48.sp,
                       )),
-                  IconButton(
-                      onPressed: () => ref
-                          .read(rocketsDatabaseStateNotifierProvider.notifier)
-                          .addRocketsToDataBase(widget.rocket),
-                      icon: Icon(
-                        Icons.bookmark_outline,
-                        color: AppColors.darkText,
-                        size: 48.sp,
-                      )),
+                  Consumer(
+                    builder: (context, ref, child) {
+                      return IconButton(
+                          onPressed: () => ref
+                              .read(
+                                  rocketsDatabaseStateNotifierProvider.notifier)
+                              .addRocketsToDataBase(widget.rocket),
+                          icon: Icon(
+                            Icons.bookmark_outline,
+                            color: AppColors.darkText,
+                            size: 48.sp,
+                          ));
+                    },
+                  )
                 ],
               ),
             ),
@@ -88,7 +93,7 @@ class _RocketDetailScreenState extends ConsumerState<RocketDetailScreen> {
                           widget.rocket.activeStatus ? "Active" : 'Inactive'),
                 ),
                 UrlIconButton(
-                    imageUrl: 'imageUrl',
+                    imageUrl: 'assets/images/wikipedia copy.svg',
                     link: widget.rocket.wikipediaSource,
                     title: 'Wikipedia Source'),
                 BuildTile(

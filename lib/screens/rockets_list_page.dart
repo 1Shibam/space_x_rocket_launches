@@ -11,39 +11,42 @@ class RocketsListPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final rocketsList = ref.watch(rocketsListNotifierStateProvider);
-    return Scaffold(
-      body: rocketsList.when(
-          data: (rocketData) {
-            return rocketData.isEmpty
-                ? const Center(
-                    child: Text('The launches were empty'),
-                  )
-                : Scrollbar(
-                    interactive: true,
-                    thickness: 10,
-                    radius: Radius.circular(20.r),
-                    child: ListView.builder(
-                      itemCount: rocketData.length,
-                      itemBuilder: (context, index) {
-                        final singleRocket = rocketData[index];
-                        return CustomListTileWidget(
-                          name: singleRocket.rocketName,
-                          title: 'Rocket Name',
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    RocketDetailScreen(rocket: singleRocket),
-                              )),
-                        );
-                      },
-                    ),
-                  );
-          },
-          error: (error, stackTrace) => const Center(
-                child: Text('Something went wrong'),
-              ),
-          loading: () => const Center(child: CircularProgressIndicator())),
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 20.h),
+      child: Scaffold(
+        body: rocketsList.when(
+            data: (rocketData) {
+              return rocketData.isEmpty
+                  ? const Center(
+                      child: Text('The launches were empty'),
+                    )
+                  : Scrollbar(
+                      interactive: true,
+                      thickness: 10,
+                      radius: Radius.circular(20.r),
+                      child: ListView.builder(
+                        itemCount: rocketData.length,
+                        itemBuilder: (context, index) {
+                          final singleRocket = rocketData[index];
+                          return CustomListTileWidget(
+                            name: singleRocket.rocketName,
+                            title: 'Rocket Name',
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      RocketDetailScreen(rocket: singleRocket),
+                                )),
+                          );
+                        },
+                      ),
+                    );
+            },
+            error: (error, stackTrace) => const Center(
+                  child: Text('Something went wrong'),
+                ),
+            loading: () => const Center(child: CircularProgressIndicator())),
+      ),
     );
   }
 }

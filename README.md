@@ -1,16 +1,49 @@
-# space_x_rocket_launches
+#  SpaceX Launches App
 
-A new Flutter project.
+## Overview
+The **SpaceX Launches App** is a Flutter application that fetches and displays information about SpaceX rocket launches and rocket details using the **SpaceX API**. It provides a user-friendly interface with responsive design and local storage capabilities.
 
-## Getting Started
+## 📌 Features
+-  Fetch and display **SpaceX launches**.
+-  View **rocket details** including name, description, and images.
+-  **Responsive design** using `flutter_screenutil`.
+-  **State management** with `Riverpod`.
+-  **API integration** using `Dio`.
+-  **Local storage** with `sqflite` to save favorite launches.
 
-This project is a starting point for a Flutter application.
+##  Features in Progress
+- ✅ Ability to **save launches** (currently stores them in local storage).
+- ❌ UI indication for saved launches (no visual marker on saved items yet).
 
-A few resources to get you started if this is your first Flutter project:
+## Tech Stack
+- **Flutter** - Frontend framework
+- **Dio** - API calls
+- **Riverpod** - State management
+- **sqflite** - Local storage
+- **flutter_screenutil** - Responsive design
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 📸 Screenshots
+*(Add screenshots of your app here to showcase the UI)*
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Installation & Setup
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/1Shibam/spcae_x_rocket_launches.git
+   cd spcae_x_rocket_launches
+   ```
+2. **Install dependencies:**
+   ```sh
+   flutter pub get
+   ```
+3. **Run the app:**
+   ```sh
+   flutter run
+   ```
+
+## API Used
+- [SpaceX API](https://github.com/r-spacex/SpaceX-API)
+
+
+⭐ Don't forget to **star** this repository if you find it useful!
+
+

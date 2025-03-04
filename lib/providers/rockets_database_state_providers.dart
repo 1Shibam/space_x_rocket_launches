@@ -11,7 +11,7 @@ class RocketsDatabaseStateNotifier
 
   Future<void> fetchRocketsListFromDataBase() async {
     try {
-      print('list should be updates');
+
       state = const AsyncValue.loading();
       final rocketDBService =
           await ref.read(rocketsDatabaseServiceProvier.future);
@@ -24,7 +24,7 @@ class RocketsDatabaseStateNotifier
 
   Future<void> addRocketsToDataBase(RocketsDataModel rocket) async {
     try {
-      print('hollalalal adding ');
+
       state = const AsyncValue.loading();
       final rocketDBService =
           await ref.read(rocketsDatabaseServiceProvier.future);

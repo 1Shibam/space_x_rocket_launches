@@ -11,7 +11,7 @@ class RocketsDatabaseService {
   //? add data to the rockets Database
   Future<void> addToRocketsDB(RocketsDataModel rocket) async {
     try {
-      print('adding borhter');
+
       await database.insert('rocketsTable', rocket.toDBMap());
     } catch (error, stackTrace) {
       debugPrint('error adding rocket - $error');
