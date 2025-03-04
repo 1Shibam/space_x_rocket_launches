@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:space_x_rocket_launches/screens/launches_list_page.dart';
 import 'package:space_x_rocket_launches/screens/rockets_list_page.dart';
+import 'package:space_x_rocket_launches/screens/saved_launches_screen.dart';
 import 'package:space_x_rocket_launches/theme/app_colors.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -63,6 +64,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       ListTile(
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SavedLaunchesScreen(),
+                            )),
                         leading: const Icon(
                           Icons.bookmark,
                           color: AppColors.darkText,

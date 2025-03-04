@@ -40,6 +40,8 @@ class LaunchesDatabaseStateNotifier
     final updatedLaunches = await launchDBService.getListOfLaunchesFromDB();
     state = AsyncValue.data(updatedLaunches);
   }
+
+  
 }
 
 final launchesDatabaseStateNotifierProvider = StateNotifierProvider<

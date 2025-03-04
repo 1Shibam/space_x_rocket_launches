@@ -46,6 +46,8 @@ class LaunchesDatabaseService {
       return 0;
     }
   }
+
+  
 }
 
 final launchesDatabaseServiceProvider =

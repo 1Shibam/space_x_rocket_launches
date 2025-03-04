@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:space_x_rocket_launches/providers/rockets_list_provider.dart';
 import 'package:space_x_rocket_launches/widgets/custom_tile_widget.dart';
+import 'package:space_x_rocket_launches/widgets/rockets_detail_screen.dart';
 
 class RocketsListPage extends ConsumerWidget {
   const RocketsListPage({super.key});
@@ -28,6 +29,12 @@ class RocketsListPage extends ConsumerWidget {
                         return CustomListTileWidget(
                           name: singleRocket.rocketName,
                           title: 'Rocket Name',
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    RocketDetailScreen(rocket: singleRocket),
+                              )),
                         );
                       },
                     ),

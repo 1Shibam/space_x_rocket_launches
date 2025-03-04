@@ -43,6 +43,7 @@ class RocketsDatabaseService {
       return 0;
     }
   }
+  
 }
 
 final rocketsDatabaseServiceProvier =
