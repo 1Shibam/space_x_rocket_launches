@@ -4,10 +4,10 @@
 The **SpaceX Launches App** is a Flutter application that fetches and displays information about SpaceX rocket launches and rocket details using the **SpaceX API**. It provides a user-friendly interface with responsive design and local storage capabilities.
 
 ## 📌 Features
--  Fetch and display **SpaceX launches**.
+-  Fetch and display **SpaceX launches** and **SpaceX Rockets**.
+-  search the launches by their name, sort searching by either **Success Status** or **Date**.
 -  View **Launches Details** including name, description, and Urls for more information
 -  View **rocket Details** including name, description, and rocket Details.
--  search the launches by their name.
 -  **State management** with `Riverpod`.
 -  **API integration** using `Dio`.
 -  **Responsive design** using `flutter_screenutil`.
