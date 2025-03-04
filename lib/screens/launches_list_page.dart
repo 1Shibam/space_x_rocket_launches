@@ -4,7 +4,11 @@ import 'package:space_x_rocket_launches/providers/launches_list_provider.dart';
 import 'package:space_x_rocket_launches/providers/search_query_providre.dart';
 import 'package:space_x_rocket_launches/widgets/reusable_widgets/custom_tile_widget.dart';
 import 'package:space_x_rocket_launches/widgets/data_widgets/launches_detail_screen.dart';
-import 'package:space_x_rocket_launches/widgets/reusable_widgets/error_state_widget.dart';
+
+import '../widgets/reusable_widgets/error_state_widget.dart';
+
+//sort type State provider --
+final sortTypeProvider = StateProvider<String>((ref) => 'Launch Date');
 
 class LaunchesListPage extends ConsumerWidget {
   const LaunchesListPage({super.key});
@@ -49,9 +53,50 @@ class LaunchesListPage extends ConsumerWidget {
                         icon: const Icon(Icons.search))
                   ],
                 ),
-                SizedBox(
-                  height: 16.h,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Sort Type:',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      //sorting state change here -
+                      Consumer(
+                        builder: (context, ref, child) {
+                          return DropdownButton<String>(
+                            value: ref.watch(sortTypeProvider),
+                            dropdownColor: AppColors.darkAccent,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            borderRadius: BorderRadius.circular(12.r),
+                            items: [
+                              DropdownMenuItem(
+                                value: 'Launch Date',
+                                child: Text(
+                                  'Launch Date',
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                              ),
+                              DropdownMenuItem(
+                                value: 'Success Status',
+                                child: Text(
+                                  'Success Status',
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                              ),
+                            ],
+                            onChanged: (value) {
+                              ref.read(sortTypeProvider.notifier).state =
+                                  value!;
+                            },
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
+
                 const Divider(),
                 SizedBox(
                   height: 16.h,
@@ -59,9 +104,11 @@ class LaunchesListPage extends ConsumerWidget {
               ],
             ),
           ),
+          //List tiles
           Expanded(
             child: Consumer(
               builder: (context, ref, child) {
+                final sortType = ref.watch(sortTypeProvider);
                 final launchesList =
                     ref.watch(launchesListNotifierStateProvider);
                 final searchQuery = ref.watch(searchQueryProvider);
@@ -73,6 +120,18 @@ class LaunchesListPage extends ConsumerWidget {
                               .toLowerCase()
                               .contains(searchQuery.toLowerCase()))
                           .toList();
+                      //Filter the list by type
+                      if (sortType == 'Success Status') {
+                        filteredLaunches.sort((a, b) {
+                          final aSuccess = a.successStatus ? 1 : 0;
+                          final bSuccess = b.successStatus ? 1 : 0;
+                          return bSuccess.compareTo(aSuccess);
+                        });
+                      } else {
+                        filteredLaunches.sort((a, b) => b.landingDate
+                            .split('T')[0]
+                            .compareTo(a.landingDate.split('T')[0]));
+                      }
                       return filteredLaunches.isEmpty
                           ? const Center(
                               child: Text('No matching results'),
@@ -103,8 +162,9 @@ class LaunchesListPage extends ConsumerWidget {
                               ),
                             );
                     },
-                    //show error
-                    error: (error, stackTrace) => const ErrorStateWidget(),
+                    error: (error, stackTrace) {
+                      return const ErrorStateWidget();
+                    },
                     loading: () => const Center(
                             child: CircularProgressIndicator(
                           color: Colors.blue,

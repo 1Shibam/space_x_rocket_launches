@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:space_x_rocket_launches/common_exports.dart';
 import 'package:space_x_rocket_launches/screens/launches_list_page.dart';
 import 'package:space_x_rocket_launches/screens/rockets_list_page.dart';
-
 import 'package:space_x_rocket_launches/widgets/drawer/drawer_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,8 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> pages = [
     const LaunchesListPage(),
     const RocketsListPage()
-
-
   ];
 
   @override
@@ -33,13 +30,24 @@ class _HomeScreenState extends State<HomeScreen> {
             appBar: PreferredSize(
                 preferredSize: const Size.fromHeight(60.0),
                 child: AppBar(
-                  leading: Builder(
-                    builder: (context) => IconButton(
-                        onPressed: () {
-                          Scaffold.of(context).openDrawer();
-                        },
-                        icon: const Icon(Icons.menu)),
+                  leading: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8.w),
+                    child: Builder(
+                      builder: (context) => IconButton(
+                          onPressed: () {
+                            Scaffold.of(context).openDrawer();
+                          },
+                          icon: const Icon(Icons.menu)),
+                    ),
                   ),
+                  actions: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8.w),
+                      child: IconButton(
+                          onPressed: () => context.go(RouterName.splash),
+                          icon: const Icon(Icons.refresh)),
+                    )
+                  ],
                   title: Text(
                     'Space-X',
                     style: Theme.of(context).textTheme.headlineLarge,
@@ -72,5 +80,3 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: pages[selectPage])));
   }
 }
-
-
