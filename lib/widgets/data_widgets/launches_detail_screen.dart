@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:space_x_rocket_launches/common_exports.dart';
 import 'package:space_x_rocket_launches/models/launches_data_model.dart';
 import 'package:space_x_rocket_launches/providers/launches_database_state_providers.dart';
-import 'package:space_x_rocket_launches/providers/rockets_list_provider.dart';
 import 'package:space_x_rocket_launches/widgets/widgets_export.dart';
 
 class LaunchesDetailScreen extends ConsumerWidget {
@@ -18,14 +17,7 @@ class LaunchesDetailScreen extends ConsumerWidget {
       error: (_, __) => false,
       loading: () => false,
     );
-    //? getting the rocket name by matching the ids-
-    final rockets = ref.watch(rocketsListNotifierStateProvider).value!;
-    String rocketName = '';
-    for (int i = 0; i < rockets.length; i++) {
-      if (rockets[i].id == launch.id) {
-        rocketName = rockets[i].rocketName;
-      }
-    }
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Scaffold(
@@ -97,8 +89,8 @@ class LaunchesDetailScreen extends ConsumerWidget {
                 subtitle: launch.missionName,
               ),
               BuildTile(
-                title: 'Rocket Name',
-                subtitle: rocketName,
+                title: 'Flight Number',
+                subtitle: launch.flightNumber.toString(),
               ),
               Row(
                 mainAxisSize: MainAxisSize.min,

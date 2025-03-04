@@ -12,7 +12,7 @@ class AllDrawerTiles extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         DrawerTile(
-          onTap: () => context.push(RouterName.savedRocket),
+          onTap: () => context.push(RouterName.savedLaunches),
           iconName: Icons.bookmark,
           title: 'Launches',
         ),
