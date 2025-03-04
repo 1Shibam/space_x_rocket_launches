@@ -6,6 +6,7 @@ import 'package:space_x_rocket_launches/providers/launches_database_state_provid
 import 'package:space_x_rocket_launches/providers/rockets_list_provider.dart';
 import 'package:space_x_rocket_launches/theme/app_colors.dart';
 import 'package:space_x_rocket_launches/widgets/build_tile.dart';
+import 'package:space_x_rocket_launches/widgets/custom_snackbar.dart';
 
 import 'package:space_x_rocket_launches/widgets/url_icon_button.dart';
 
@@ -44,9 +45,15 @@ class LaunchesDetailScreen extends ConsumerWidget {
                         size: 48.sp,
                       )),
                   IconButton(
-                      onPressed: () => ref
-                          .read(launchesDatabaseStateNotifierProvider.notifier)
-                          .addLauchesToDataBase(launch),
+                      onPressed: () async {
+                        await ref
+                            .read(
+                                launchesDatabaseStateNotifierProvider.notifier)
+                            .addLauchesToDataBase(launch);
+                        if (context.mounted) {
+                          customSnackBar('Launch Saved', 2, context);
+                        }
+                      },
                       icon: Icon(
                         Icons.bookmark_outline,
                         color: AppColors.darkText,

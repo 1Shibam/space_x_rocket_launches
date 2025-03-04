@@ -21,8 +21,7 @@ class UrlIconButton extends StatelessWidget {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
     } else {
       if (context.mounted) {
-        customSnackBar(
-            'Couldn\'t launch the URL', const Duration(seconds: 2), context,
+        customSnackBar('Couldn\'t launch the URL', 2, context,
             bgColor: AppColors.errorRed);
       }
       debugPrint("Could not launch $link");

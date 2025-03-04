@@ -5,6 +5,7 @@ import 'package:space_x_rocket_launches/models/rockets_data_model.dart';
 import 'package:space_x_rocket_launches/providers/rockets_database_state_providers.dart';
 
 import 'package:space_x_rocket_launches/theme/app_colors.dart';
+import 'package:space_x_rocket_launches/widgets/custom_snackbar.dart';
 import 'package:space_x_rocket_launches/widgets/url_icon_button.dart';
 
 import 'build_tile.dart';
@@ -45,10 +46,15 @@ class _RocketDetailScreenState extends State<RocketDetailScreen> {
                   Consumer(
                     builder: (context, ref, child) {
                       return IconButton(
-                          onPressed: () => ref
-                              .read(
-                                  rocketsDatabaseStateNotifierProvider.notifier)
-                              .addRocketsToDataBase(widget.rocket),
+                          onPressed: () async {
+                            await ref
+                                .read(rocketsDatabaseStateNotifierProvider
+                                    .notifier)
+                                .addRocketsToDataBase(widget.rocket);
+                            if (context.mounted) {
+                              customSnackBar('Rocket Saved', 2, context);
+                            }
+                          },
                           icon: Icon(
                             Icons.bookmark_outline,
                             color: AppColors.darkText,
