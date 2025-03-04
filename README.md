@@ -5,15 +5,14 @@ The **SpaceX Launches App** is a Flutter application that fetches and displays i
 
 ## 📌 Features
 -  Fetch and display **SpaceX launches**.
--  View **rocket details** including name, description, and images.
--  **Responsive design** using `flutter_screenutil`.
+-  View **Launches Details** including name, description, and Urls for more information
+-  View **rocket Details** including name, description, and rocket Details.
+-  search the launches by their name.
 -  **State management** with `Riverpod`.
 -  **API integration** using `Dio`.
--  **Local storage** with `sqflite` to save favorite launches.
+-  **Responsive design** using `flutter_screenutil`.
+-  **Local storage** with `sqflite` to save favorite launches and rockets.
 
-##  Features in Progress
-- ✅ Ability to **save launches** (currently stores them in local storage).
-- ❌ UI indication for saved launches (no visual marker on saved items yet).
 
 ## Tech Stack
 - **Flutter** - Frontend framework
