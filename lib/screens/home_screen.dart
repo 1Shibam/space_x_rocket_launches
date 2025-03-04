@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:space_x_rocket_launches/common_exports.dart';
 import 'package:space_x_rocket_launches/screens/launches_list_page.dart';
 import 'package:space_x_rocket_launches/screens/rockets_list_page.dart';
@@ -42,11 +43,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   actions: [
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.w),
-                      child: IconButton(
-                          onPressed: () => context.go(RouterName.splash),
-                          icon: const Icon(Icons.refresh)),
-                    )
+                        padding: EdgeInsets.symmetric(horizontal: 8.w),
+                        child: Consumer(
+                          builder: (context, ref, child) {
+                            return IconButton(
+                                onPressed: () {
+                                  
+                                  context.go(RouterName.splash);
+                                },
+                                icon: const Icon(Icons.refresh));
+                          },
+                        ))
                   ],
                   title: Text(
                     'Space-X',

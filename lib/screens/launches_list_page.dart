@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:space_x_rocket_launches/common_exports.dart';
 import 'package:space_x_rocket_launches/providers/launches_list_provider.dart';
-import 'package:space_x_rocket_launches/providers/search_query_providre.dart';
+
 import 'package:space_x_rocket_launches/widgets/reusable_widgets/custom_tile_widget.dart';
 import 'package:space_x_rocket_launches/widgets/data_widgets/launches_detail_screen.dart';
 
@@ -9,6 +9,9 @@ import '../widgets/reusable_widgets/error_state_widget.dart';
 
 //sort type State provider --
 final sortTypeProvider = StateProvider<String>((ref) => 'Launch Date');
+
+//Search query provider --
+final searchQueryProvider = AutoDisposeStateProvider<String>((ref) => '');
 
 class LaunchesListPage extends ConsumerWidget {
   const LaunchesListPage({super.key});
