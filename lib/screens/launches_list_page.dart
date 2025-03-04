@@ -4,6 +4,7 @@ import 'package:space_x_rocket_launches/providers/launches_list_provider.dart';
 import 'package:space_x_rocket_launches/providers/search_query_providre.dart';
 import 'package:space_x_rocket_launches/widgets/reusable_widgets/custom_tile_widget.dart';
 import 'package:space_x_rocket_launches/widgets/data_widgets/launches_detail_screen.dart';
+import 'package:space_x_rocket_launches/widgets/reusable_widgets/error_state_widget.dart';
 
 class LaunchesListPage extends ConsumerWidget {
   const LaunchesListPage({super.key});
@@ -66,6 +67,7 @@ class LaunchesListPage extends ConsumerWidget {
                 final searchQuery = ref.watch(searchQueryProvider);
                 return launchesList.when(
                     data: (launchData) {
+                      //Filtering the search by name
                       final filteredLaunches = launchData
                           .where((launch) => launch.missionName
                               .toLowerCase()
@@ -101,9 +103,8 @@ class LaunchesListPage extends ConsumerWidget {
                               ),
                             );
                     },
-                    error: (error, stackTrace) => const Center(
-                          child: Text('Something went wrong'),
-                        ),
+                    //show error
+                    error: (error, stackTrace) => const ErrorStateWidget(),
                     loading: () => const Center(
                             child: CircularProgressIndicator(
                           color: Colors.blue,

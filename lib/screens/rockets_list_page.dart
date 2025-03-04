@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:space_x_rocket_launches/providers/rockets_list_provider.dart';
 import 'package:space_x_rocket_launches/widgets/reusable_widgets/custom_tile_widget.dart';
 import 'package:space_x_rocket_launches/widgets/data_widgets/rockets_detail_screen.dart';
+import 'package:space_x_rocket_launches/widgets/reusable_widgets/error_state_widget.dart';
 
 class RocketsListPage extends ConsumerWidget {
   const RocketsListPage({super.key});
@@ -42,9 +43,7 @@ class RocketsListPage extends ConsumerWidget {
                       ),
                     );
             },
-            error: (error, stackTrace) => const Center(
-                  child: Text('Something went wrong'),
-                ),
+            error: (error, stackTrace) => const ErrorStateWidget(),
             loading: () => const Center(child: CircularProgressIndicator())),
       ),
     );

@@ -22,10 +22,10 @@ class SpaceXServices {
 
         return result;
       } else {
-        return [];
+        throw Exception('Failed to fetch Rockets: ${response.statusCode}');
       }
     } catch (e) {
-      return [];
+      rethrow;
     }
   }
 
@@ -42,10 +42,10 @@ class SpaceXServices {
 
         return result;
       } else {
-        return [];
+        throw Exception('Failed to fetch Rockets: ${response.statusCode}');
       }
     } catch (e) {
-      return [];
+      rethrow;
     }
   }
 }
