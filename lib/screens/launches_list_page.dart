@@ -23,7 +23,11 @@ class LaunchesListPage extends ConsumerWidget {
                 SizedBox(
                   height: 20.h,
                 ),
+
+                //Search - Bar
                 SearchBar(
+                  textStyle: WidgetStatePropertyAll(
+                      Theme.of(context).textTheme.bodyLarge),
                   onChanged: (value) {
                     ref.read(searchQueryProvider.notifier).state = value;
                   },
@@ -37,7 +41,11 @@ class LaunchesListPage extends ConsumerWidget {
                   backgroundColor:
                       WidgetStateProperty.all(AppColors.darkAccent),
                   trailing: [
-                    IconButton(onPressed: () {}, icon: const Icon(Icons.search))
+                    IconButton(
+                        onPressed: () {
+                          FocusScope.of(context).unfocus();
+                        },
+                        icon: const Icon(Icons.search))
                   ],
                 ),
                 SizedBox(
