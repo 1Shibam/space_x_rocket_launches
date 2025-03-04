@@ -59,6 +59,7 @@ class SavedLaunchesScreen extends ConsumerWidget {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             LaunchesDetailScreen(
+                                              isSaved: false,
                                                 launch: singleData),
                                       )),
                                 );

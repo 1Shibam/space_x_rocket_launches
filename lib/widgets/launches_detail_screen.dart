@@ -11,8 +11,9 @@ import 'package:space_x_rocket_launches/widgets/custom_snackbar.dart';
 import 'package:space_x_rocket_launches/widgets/url_icon_button.dart';
 
 class LaunchesDetailScreen extends ConsumerWidget {
-  const LaunchesDetailScreen({super.key, required this.launch});
+  const LaunchesDetailScreen({super.key, required this.launch, required this.isSaved});
   final LaunchesDataModel launch;
+  final bool isSaved;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -44,7 +45,21 @@ class LaunchesDetailScreen extends ConsumerWidget {
                         color: AppColors.darkText,
                         size: 48.sp,
                       )),
-                  IconButton(
+                  isSaved ? IconButton(
+                      onPressed: () async {
+                        await ref
+                            .read(
+                                launchesDatabaseStateNotifierProvider.notifier)
+                            .deleteLaunchesFromDataBase(launch.launchID!);
+                        if (context.mounted) {
+                          customSnackBar('Launch Saved', 2, context);
+                        }
+                      },
+                      icon: Icon(
+                        Icons.bookmark,
+                        color: AppColors.darkText,
+                        size: 48.sp,
+                      )): IconButton(
                       onPressed: () async {
                         await ref
                             .read(
@@ -58,7 +73,7 @@ class LaunchesDetailScreen extends ConsumerWidget {
                         Icons.bookmark_outline,
                         color: AppColors.darkText,
                         size: 48.sp,
-                      )),
+                      ))
                 ],
               ),
             ),

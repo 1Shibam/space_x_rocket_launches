@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:space_x_rocket_launches/providers/launches_list_provider.dart';
+import 'package:space_x_rocket_launches/providers/search_query_providre.dart';
 import 'package:space_x_rocket_launches/theme/app_colors.dart';
 import 'package:space_x_rocket_launches/widgets/custom_tile_widget.dart';
 import 'package:space_x_rocket_launches/widgets/launches_detail_screen.dart';
 
-class LaunchesListPage extends StatelessWidget {
+class LaunchesListPage extends ConsumerWidget {
   const LaunchesListPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
         body: Padding(
       padding: EdgeInsets.symmetric(horizontal: 8.w),
@@ -25,6 +26,9 @@ class LaunchesListPage extends StatelessWidget {
                   height: 20.h,
                 ),
                 SearchBar(
+                  onChanged: (value) {
+                    ref.read(searchQueryProvider.notifier).state = value;
+                  },
                   elevation: const WidgetStatePropertyAll(20),
                   shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.r))),
@@ -53,20 +57,26 @@ class LaunchesListPage extends StatelessWidget {
               builder: (context, ref, child) {
                 final launchesList =
                     ref.watch(launchesListNotifierStateProvider);
+                final searchQuery = ref.watch(searchQueryProvider);
                 return launchesList.when(
                     data: (launchData) {
-                      return launchData.isEmpty
+                      final filteredLaunches = launchData
+                          .where((launch) => launch.missionName
+                              .toLowerCase()
+                              .contains(searchQuery.toLowerCase()))
+                          .toList();
+                      return filteredLaunches.isEmpty
                           ? const Center(
-                              child: Text('The launches were empty'),
+                              child: Text('No matching results'),
                             )
                           : Scrollbar(
                               interactive: true,
                               thickness: 10,
                               radius: Radius.circular(20.r),
                               child: ListView.builder(
-                                itemCount: launchData.length,
+                                itemCount: filteredLaunches.length,
                                 itemBuilder: (context, index) {
-                                  final singleLaunch = launchData[index];
+                                  final singleLaunch = filteredLaunches[index];
                                   return CustomListTileWidget(
                                       onTap: () {
                                         Navigator.push(
@@ -74,6 +84,7 @@ class LaunchesListPage extends StatelessWidget {
                                             MaterialPageRoute(
                                               builder: (context) =>
                                                   LaunchesDetailScreen(
+                                                      isSaved: false,
                                                       launch: singleLaunch),
                                             ));
                                       },
