@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 // rockets data model
 @immutable
 class RocketsDataModel {
-  final int? rocketID;
+
   final String id;
   final String rocketName;
   final bool activeStatus;
@@ -21,7 +21,7 @@ class RocketsDataModel {
   final double massInLbs;
 
   const RocketsDataModel(
-      {this.rocketID,
+      {
       required this.id,
       required this.rocketName,
       required this.activeStatus,
@@ -78,7 +78,7 @@ class RocketsDataModel {
   //From DB method -
   factory RocketsDataModel.fromDBMap(Map<String, dynamic> map) {
     return RocketsDataModel(
-        rocketID: map['rocketID'] as int?,
+
         id: map['id'] ?? '',
         rocketName: map['rocketName'] ?? '',
         activeStatus: map['activeStatus'] == 1,

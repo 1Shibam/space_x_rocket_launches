@@ -39,7 +39,7 @@ class LaunchesDataModel {
 
   factory LaunchesDataModel.fromDBMap(Map<String, dynamic> map) {
     return LaunchesDataModel(
-        launchID: map['launchID'] as int?,
+
         flightNumber: map['flightNumber'],
         videoSource: map['videoSource'],
         articleSoruce: map['articleSoruce'],

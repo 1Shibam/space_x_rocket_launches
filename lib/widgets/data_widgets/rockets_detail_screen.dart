@@ -1,28 +1,33 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:space_x_rocket_launches/common_exports.dart';
+
 import 'package:space_x_rocket_launches/models/rockets_data_model.dart';
 import 'package:space_x_rocket_launches/providers/rockets_database_state_providers.dart';
 
-import 'package:space_x_rocket_launches/theme/app_colors.dart';
-import 'package:space_x_rocket_launches/widgets/custom_snackbar.dart';
-import 'package:space_x_rocket_launches/widgets/url_icon_button.dart';
+import 'package:space_x_rocket_launches/widgets/reusable_widgets/url_icon_button.dart';
 
-import 'build_tile.dart';
+import '../reusable_widgets/build_tile.dart';
 
-class RocketDetailScreen extends StatefulWidget {
+class RocketDetailScreen extends ConsumerStatefulWidget {
   const RocketDetailScreen({super.key, required this.rocket});
   final RocketsDataModel rocket;
 
   @override
-  State<RocketDetailScreen> createState() => _RocketDetailScreenState();
+  ConsumerState<RocketDetailScreen> createState() => _RocketDetailScreenState();
 }
 
-class _RocketDetailScreenState extends State<RocketDetailScreen> {
+class _RocketDetailScreenState extends ConsumerState<RocketDetailScreen> {
   bool isMetric = true;
 
   @override
   Widget build(BuildContext context) {
+    final savedRocketsAsync = ref.watch(rocketsDatabaseStateNotifierProvider);
+    final bool isSaved = savedRocketsAsync.when(
+      data: (savedList) =>
+          savedList.any((dbRocket) => dbRocket.id == widget.rocket.id),
+      error: (_, __) => false,
+      loading: () => false,
+    );
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Scaffold(
@@ -37,31 +42,46 @@ class _RocketDetailScreenState extends State<RocketDetailScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () => context.pop(),
                       icon: Icon(
                         Icons.clear,
                         color: AppColors.darkText,
                         size: 48.sp,
                       )),
-                  Consumer(
-                    builder: (context, ref, child) {
-                      return IconButton(
+                  isSaved
+                      ? IconButton(
+                          onPressed: () async {
+                            await ref
+                                .read(rocketsDatabaseStateNotifierProvider
+                                    .notifier)
+                                .deleteRocketsFromTheDataBase(widget.rocket.id);
+                            if (context.mounted) {
+                              customSnackBar(
+                                  'Rocket removed form Saved', 2, context,
+                                  bgColor: AppColors.errorRed);
+                            }
+                          },
+                          icon: Icon(
+                            Icons.bookmark,
+                            color: AppColors.darkText,
+                            size: 48.sp,
+                          ))
+                      : IconButton(
                           onPressed: () async {
                             await ref
                                 .read(rocketsDatabaseStateNotifierProvider
                                     .notifier)
                                 .addRocketsToDataBase(widget.rocket);
                             if (context.mounted) {
-                              customSnackBar('Rocket Saved', 2, context);
+                              customSnackBar('Rocket Saved', 2, context,
+                                  bgColor: AppColors.green);
                             }
                           },
                           icon: Icon(
                             Icons.bookmark_outline,
                             color: AppColors.darkText,
                             size: 48.sp,
-                          ));
-                    },
-                  )
+                          ))
                 ],
               ),
             ),

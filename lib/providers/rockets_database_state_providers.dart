@@ -36,12 +36,12 @@ class RocketsDatabaseStateNotifier
     }
   }
 
-  Future<void> deleteRocketsFromTheDataBase(int rocketID) async {
+  Future<void> deleteRocketsFromTheDataBase(String id) async {
     try {
       state = const AsyncValue.loading();
       final rocketDBService =
           await ref.read(rocketsDatabaseServiceProvier.future);
-      await rocketDBService.deleteRocketsFromDB(rocketID);
+      await rocketDBService.deleteRocketsFromDB(id);
       final updatedRockets = await rocketDBService.getListOfRocketsFromDB();
       state = AsyncValue.data(updatedRockets);
     } catch (error, stackTrace) {

@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:space_x_rocket_launches/theme/app_colors.dart';
+import 'package:space_x_rocket_launches/common_exports.dart';
 
 void customSnackBar(String message, int duration, BuildContext context,
     {Color bgColor = AppColors.darkAccent}) {

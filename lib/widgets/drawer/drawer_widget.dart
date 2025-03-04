@@ -1,7 +1,10 @@
-import 'package:flutter/material.dart';
 
-import 'package:space_x_rocket_launches/theme/app_colors.dart';
-import 'package:space_x_rocket_launches/widgets/all_drawer_tiles.dart';
+
+import 'package:space_x_rocket_launches/common_exports.dart';
+
+import 'all_drawer_tiles.dart';
+
+
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({
@@ -10,9 +13,11 @@ class DrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ScrollController drawerScrollController = ScrollController();
     return Drawer(
       backgroundColor: AppColors.darkAccent,
       child: ListView(
+        controller: drawerScrollController,
         children: [
           DrawerHeader(
               child: Align(

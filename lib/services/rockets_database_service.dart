@@ -11,7 +11,6 @@ class RocketsDatabaseService {
   //? add data to the rockets Database
   Future<void> addToRocketsDB(RocketsDataModel rocket) async {
     try {
-
       await database.insert('rocketsTable', rocket.toDBMap());
     } catch (error, stackTrace) {
       debugPrint('error adding rocket - $error');
@@ -32,10 +31,10 @@ class RocketsDatabaseService {
   }
 
   //? delete the rockets data -
-  Future<int> deleteRocketsFromDB(int rocketID) async {
+  Future<int> deleteRocketsFromDB(String id) async {
     try {
       return await database
-          .delete('rocketsTable', where: 'rocketID = ?', whereArgs: [rocketID]);
+          .delete('rocketsTable', where: 'id = ?', whereArgs: [id]);
     } catch (error, stackTrace) {
       debugPrint('Error deleting the rocket - $error');
       debugPrintStack(stackTrace: stackTrace);

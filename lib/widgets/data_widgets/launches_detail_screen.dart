@@ -1,22 +1,23 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:space_x_rocket_launches/common_exports.dart';
 import 'package:space_x_rocket_launches/models/launches_data_model.dart';
 import 'package:space_x_rocket_launches/providers/launches_database_state_providers.dart';
 import 'package:space_x_rocket_launches/providers/rockets_list_provider.dart';
-import 'package:space_x_rocket_launches/theme/app_colors.dart';
-import 'package:space_x_rocket_launches/widgets/build_tile.dart';
-import 'package:space_x_rocket_launches/widgets/custom_snackbar.dart';
-
-import 'package:space_x_rocket_launches/widgets/url_icon_button.dart';
+import 'package:space_x_rocket_launches/widgets/widgets_export.dart';
 
 class LaunchesDetailScreen extends ConsumerWidget {
-  const LaunchesDetailScreen({super.key, required this.launch, required this.isSaved});
+  const LaunchesDetailScreen({super.key, required this.launch});
   final LaunchesDataModel launch;
-  final bool isSaved;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final savedLaunchAsync = ref.watch(launchesDatabaseStateNotifierProvider);
+    final bool isSaved = savedLaunchAsync.when(
+      data: (savedList) => savedList
+          .any((dbLaunch) => dbLaunch.flightNumber == launch.flightNumber),
+      error: (_, __) => false,
+      loading: () => false,
+    );
     //? getting the rocket name by matching the ids-
     final rockets = ref.watch(rocketsListNotifierStateProvider).value!;
     String rocketName = '';
@@ -39,41 +40,47 @@ class LaunchesDetailScreen extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () => context.pop(),
                       icon: Icon(
                         Icons.clear,
                         color: AppColors.darkText,
                         size: 48.sp,
                       )),
-                  isSaved ? IconButton(
-                      onPressed: () async {
-                        await ref
-                            .read(
-                                launchesDatabaseStateNotifierProvider.notifier)
-                            .deleteLaunchesFromDataBase(launch.launchID!);
-                        if (context.mounted) {
-                          customSnackBar('Launch Saved', 2, context);
-                        }
-                      },
-                      icon: Icon(
-                        Icons.bookmark,
-                        color: AppColors.darkText,
-                        size: 48.sp,
-                      )): IconButton(
-                      onPressed: () async {
-                        await ref
-                            .read(
-                                launchesDatabaseStateNotifierProvider.notifier)
-                            .addLauchesToDataBase(launch);
-                        if (context.mounted) {
-                          customSnackBar('Launch Saved', 2, context);
-                        }
-                      },
-                      icon: Icon(
-                        Icons.bookmark_outline,
-                        color: AppColors.darkText,
-                        size: 48.sp,
-                      ))
+                  isSaved
+                      ? IconButton(
+                          onPressed: () async {
+                            await ref
+                                .read(launchesDatabaseStateNotifierProvider
+                                    .notifier)
+                                .deleteLaunchesFromDataBase(
+                                    launch.flightNumber);
+                            if (context.mounted) {
+                              customSnackBar(
+                                  'Launch removed from saved', 2, context,
+                                  bgColor: AppColors.errorRed);
+                            }
+                          },
+                          icon: Icon(
+                            Icons.bookmark,
+                            color: AppColors.darkText,
+                            size: 48.sp,
+                          ))
+                      : IconButton(
+                          onPressed: () async {
+                            await ref
+                                .read(launchesDatabaseStateNotifierProvider
+                                    .notifier)
+                                .addLauchesToDataBase(launch);
+                            if (context.mounted) {
+                              customSnackBar('Launch Saved', 2, context,
+                                  bgColor: AppColors.green);
+                            }
+                          },
+                          icon: Icon(
+                            Icons.bookmark_outline,
+                            color: AppColors.darkText,
+                            size: 48.sp,
+                          ))
                 ],
               ),
             ),

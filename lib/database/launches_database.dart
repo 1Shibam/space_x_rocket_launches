@@ -14,8 +14,8 @@ final launchesDatabaseProvider = FutureProvider<Database>((ref) async {
       //? SQL query for launches database
       launchesDatabase.execute('''
       CREATE TABLE launchesTable(
-      launchID INTEGER PRIMARY KEY AUTOINCREMENT,
-      flightNumber INTEGER,
+
+      flightNumber INTEGER PRIMARY KEY,
       videoSource TEXT,
       articleSoruce TEXT,
       wikipediaSource TEXT,

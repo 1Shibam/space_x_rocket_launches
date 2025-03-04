@@ -1,11 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:space_x_rocket_launches/common_exports.dart';
 import 'package:space_x_rocket_launches/providers/launches_database_state_providers.dart';
 import 'package:space_x_rocket_launches/providers/launches_list_provider.dart';
 import 'package:space_x_rocket_launches/providers/rockets_database_state_providers.dart';
 import 'package:space_x_rocket_launches/providers/rockets_list_provider.dart';
-import 'package:space_x_rocket_launches/router/router_name.dart';
 
 class SplashScreen extends ConsumerWidget {
   const SplashScreen({super.key});

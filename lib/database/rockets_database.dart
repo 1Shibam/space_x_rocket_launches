@@ -13,8 +13,8 @@ final rocketDataBaseProvider = FutureProvider<Database>((ref) async {
     onCreate: (rocketsDatabase, version) {
       rocketsDatabase.execute('''
     CREATE TABLE rocketsTable(
-    rocketID INTEGER PRIMARY KEY AUTOINCREMENT,
-    id TEXT,
+
+    id TEXT PRIMARY KEY,
     rocketName TEXT,
     activeStatus INTEGER DEFAULT 0,
     costPerLaunch INTEGER,

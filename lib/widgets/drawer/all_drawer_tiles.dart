@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:space_x_rocket_launches/screens/saved_launches_screen.dart';
-import 'package:space_x_rocket_launches/screens/saved_rocket_screen.dart';
-import 'package:space_x_rocket_launches/theme/app_colors.dart';
+import 'package:space_x_rocket_launches/common_exports.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AllDrawerTiles extends StatelessWidget {
@@ -15,34 +12,20 @@ class AllDrawerTiles extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         DrawerTile(
-          onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const SavedLaunchesScreen())),
+          onTap: () => context.push(RouterName.savedRocket),
           iconName: Icons.bookmark,
           title: 'Launches',
         ),
         DrawerTile(
-          iconName: Icons.bookmark,
-          title: 'Rockets',
-          onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const SavedRocketsScreen(),
-              )),
-        ),
-        DrawerTile(
-          iconName: Icons.info,
-          title: 'About',
-          onTap: () {},
-        ),
+            iconName: Icons.bookmark,
+            title: 'Rockets',
+            onTap: () => context.push(RouterName.savedRocket)),
         DrawerTile(
           iconName: Icons.source,
           title: 'Source-code',
           onTap: () async {
             await launchUrl(
-                Uri.parse(
-                    'https://github.com/1Shibam/space_x_rocket_launches'),
+                Uri.parse('https://github.com/1Shibam/space_x_rocket_launches'),
                 mode: LaunchMode.externalApplication);
           },
         ),

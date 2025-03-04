@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:space_x_rocket_launches/screens/launches_list_page.dart';
 import 'package:space_x_rocket_launches/screens/rockets_list_page.dart';
 
-import 'package:space_x_rocket_launches/widgets/drawer_widget.dart';
+import 'package:space_x_rocket_launches/widgets/drawer/drawer_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
