@@ -5,6 +5,7 @@ import 'package:space_x_rocket_launches/models/rockets_data_model.dart';
 import 'package:space_x_rocket_launches/providers/rockets_database_state_providers.dart';
 
 import 'package:space_x_rocket_launches/theme/app_colors.dart';
+import 'package:space_x_rocket_launches/widgets/url_icon_button.dart';
 
 class RocketDetailScreen extends ConsumerStatefulWidget {
   const RocketDetailScreen({super.key, required this.rocket});
@@ -19,41 +20,41 @@ class _RocketDetailScreenState extends ConsumerState<RocketDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size(double.infinity, 120.h),
-        child: Container(
-          height: double.maxFinite,
-          color: AppColors.darkBackground,
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                    onPressed: () => Navigator.pop(context),
-                    icon: Icon(
-                      Icons.clear,
-                      color: AppColors.darkText,
-                      size: 48.sp,
-                    )),
-                IconButton(
-                    onPressed: () => ref
-                        .read(rocketsDatabaseStateNotifierProvider.notifier)
-                        .addRocketsToDataBase(widget.rocket),
-                    icon: Icon(
-                      Icons.bookmark_outline,
-                      color: AppColors.darkText,
-                      size: 48.sp,
-                    )),
-              ],
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size(double.infinity, 120.h),
+          child: Container(
+            height: double.maxFinite,
+            color: AppColors.darkBackground,
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: Icon(
+                        Icons.clear,
+                        color: AppColors.darkText,
+                        size: 48.sp,
+                      )),
+                  IconButton(
+                      onPressed: () => ref
+                          .read(rocketsDatabaseStateNotifierProvider.notifier)
+                          .addRocketsToDataBase(widget.rocket),
+                      icon: Icon(
+                        Icons.bookmark_outline,
+                        color: AppColors.darkText,
+                        size: 48.sp,
+                      )),
+                ],
+              ),
             ),
           ),
         ),
-      ),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
+        body: Center(
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -61,25 +62,33 @@ class _RocketDetailScreenState extends ConsumerState<RocketDetailScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(height: 20.h),
-                BuildTile(
-                    title: 'Rocket Name', subtitle: widget.rocket.rocketName),
-                BuildTile(
-                    title: 'First Launch',
-                    subtitle: widget.rocket.firstLaunch.split('T')[0]),
-                BuildTile(
-                    title: 'Status',
-                    subtitle:
-                        widget.rocket.activeStatus ? "Active" : 'Inactive'),
-                BuildTile(
-                    title: 'Cost Per Launch',
-                    subtitle: '\$${widget.rocket.costPerLaunch.toString()}'),
-                BuildTile(
-                    title: 'Success Rate',
-                    subtitle: '${widget.rocket.successRate.toString()}%'),
-                BuildTile(title: 'Country', subtitle: widget.rocket.country),
-                BuildTile(
-                    title: 'Wikipedia Source',
-                    subtitle: widget.rocket.wikipediaSource),
+                BuildRow(
+                  first: BuildTile(
+                      title: 'Rocket Name', subtitle: widget.rocket.rocketName),
+                  second: BuildTile(
+                      title: 'Country', subtitle: widget.rocket.country),
+                ),
+                BuildRow(
+                  first: BuildTile(
+                      title: 'First Launch',
+                      subtitle: widget.rocket.firstLaunch.split('T')[0]),
+                  second: BuildTile(
+                      title: 'Cost Per Launch',
+                      subtitle: '\$${widget.rocket.costPerLaunch.toString()}'),
+                ),
+                BuildRow(
+                  first: BuildTile(
+                      title: 'Success Rate',
+                      subtitle: '${widget.rocket.successRate.toString()}%'),
+                  second: BuildTile(
+                      title: 'Status',
+                      subtitle:
+                          widget.rocket.activeStatus ? "Active" : 'Inactive'),
+                ),
+                UrlIconButton(
+                    imageUrl: 'assets/images/wikipedia copy.svg',
+                    link: widget.rocket.wikipediaSource,
+                    title: 'Wikipedia Source'),
                 BuildTile(
                     title: 'Description', subtitle: widget.rocket.description),
                 const Divider(),
@@ -152,6 +161,26 @@ class BuildTile extends StatelessWidget {
           style: Theme.of(context).textTheme.bodyMedium,
         ),
       ),
+    );
+  }
+}
+
+class BuildRow extends StatelessWidget {
+  const BuildRow({super.key, required this.first, required this.second});
+  final Widget first;
+  final Widget second;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Expanded(child: first),
+        SizedBox(
+          width: 4.w,
+        ),
+        Expanded(child: second)
+      ],
     );
   }
 }

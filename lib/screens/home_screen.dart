@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:space_x_rocket_launches/screens/launches_list_page.dart';
 import 'package:space_x_rocket_launches/screens/rockets_list_page.dart';
-import 'package:space_x_rocket_launches/screens/saved_launches_screen.dart';
-import 'package:space_x_rocket_launches/theme/app_colors.dart';
+
+import 'package:space_x_rocket_launches/widgets/drawer_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,9 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const LaunchesListPage(),
     const RocketsListPage()
 
-    //5e9d0d95eda69955f709d1eb
-    //5e9d0d95eda69973a809d1ec
-    //5e9d0d96eda699382d09d1ee
+
   ];
 
   @override
@@ -48,75 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   centerTitle: true,
                 )),
-            drawer: Drawer(
-              backgroundColor: AppColors.darkAccent,
-              child: ListView(
-                children: [
-                  DrawerHeader(
-                      child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Text(
-                      'Menu',
-                      style: Theme.of(context).textTheme.headlineLarge,
-                    ),
-                  )),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      ListTile(
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const SavedLaunchesScreen(),
-                            )),
-                        leading: const Icon(
-                          Icons.bookmark,
-                          color: AppColors.darkText,
-                        ),
-                        title: Text(
-                          'Launches',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                      ),
-                      ListTile(
-                        leading: const Icon(
-                          Icons.bookmark,
-                          color: AppColors.darkText,
-                        ),
-                        title: Text(
-                          'Rockets',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                      ),
-                      ListTile(
-                        leading: const Icon(
-                          Icons.info,
-                          color: AppColors.darkText,
-                        ),
-                        title: Text(
-                          'About',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                      ),
-                      ListTile(
-                        leading: const Icon(
-                          Icons.source,
-                          color: AppColors.darkText,
-                        ),
-                        title: Row(
-                          children: [
-                            Text(
-                              'Source-Code',
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
+            drawer: const DrawerWidget(),
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: selectPage,
               onTap: (value) {
@@ -142,3 +72,5 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: pages[selectPage])));
   }
 }
+
+

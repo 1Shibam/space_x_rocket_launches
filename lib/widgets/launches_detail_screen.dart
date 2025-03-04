@@ -6,6 +6,7 @@ import 'package:space_x_rocket_launches/providers/launches_database_state_provid
 import 'package:space_x_rocket_launches/providers/rockets_list_provider.dart';
 import 'package:space_x_rocket_launches/theme/app_colors.dart';
 import 'package:space_x_rocket_launches/widgets/rockets_detail_screen.dart';
+import 'package:space_x_rocket_launches/widgets/url_icon_button.dart';
 
 class LaunchesDetailScreen extends ConsumerWidget {
   const LaunchesDetailScreen({super.key, required this.launch});
@@ -21,88 +22,92 @@ class LaunchesDetailScreen extends ConsumerWidget {
         rocketName = rockets[i].rocketName;
       }
     }
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size(double.infinity, 120.h),
-        child: Container(
-          height: double.maxFinite,
-          color: AppColors.darkBackground,
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                    onPressed: () => Navigator.pop(context),
-                    icon: Icon(
-                      Icons.clear,
-                      color: AppColors.darkText,
-                      size: 48.sp,
-                    )),
-                IconButton(
-                    onPressed: () => ref
-                        .read(launchesDatabaseStateNotifierProvider.notifier)
-                        .addLauchesToDataBase(launch),
-                    icon: Icon(
-                      Icons.bookmark_outline,
-                      color: AppColors.darkText,
-                      size: 48.sp,
-                    )),
-              ],
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size(double.infinity, 120.h),
+          child: Container(
+            height: double.maxFinite,
+            color: AppColors.darkBackground,
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: Icon(
+                        Icons.clear,
+                        color: AppColors.darkText,
+                        size: 48.sp,
+                      )),
+                  IconButton(
+                      onPressed: () => ref
+                          .read(launchesDatabaseStateNotifierProvider.notifier)
+                          .addLauchesToDataBase(launch),
+                      icon: Icon(
+                        Icons.bookmark_outline,
+                        color: AppColors.darkText,
+                        size: 48.sp,
+                      )),
+                ],
+              ),
             ),
           ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            BuildTile(
-              title: 'Mission Name',
-              subtitle: launch.missionName,
-            ),
-            BuildTile(
-              title: 'Rocket Name',
-              subtitle: rocketName,
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Expanded(
-                    child: BuildTile(
-                        title: 'Launch Date',
-                        subtitle: launch.landingDate.split('T')[0])),
-                Expanded(
-                    child: BuildTile(
-                        title: 'Status',
-                        subtitle:
-                            launch.successStatus ? "Successful" : 'Failed')),
-              ],
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Expanded(
-                    child: BuildTile(
-                        title: 'Video Source', subtitle: launch.videoSource)),
-                Expanded(
-                    child: BuildTile(
-                        title: 'Article Source',
-                        subtitle: launch.articleSoruce)),
-              ],
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Expanded(
-                    child: BuildTile(
-                        title: 'Wikipedia Source',
-                        subtitle: launch.wikipediaSource)),
-              ],
-            ),
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              BuildTile(
+                title: 'Mission Name',
+                subtitle: launch.missionName,
+              ),
+              BuildTile(
+                title: 'Rocket Name',
+                subtitle: rocketName,
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Expanded(
+                      child: BuildTile(
+                          title: 'Launch Date',
+                          subtitle: launch.landingDate.split('T')[0])),
+                  Expanded(
+                      child: BuildTile(
+                          title: 'Status',
+                          subtitle:
+                              launch.successStatus ? "Successful" : 'Failed')),
+                ],
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Expanded(
+                      child: UrlIconButton(
+                    title: 'Video source',
+                    imageUrl: 'assets/images/youtube link.svg',
+                    link: launch.videoSource,
+                  )),
+                  Expanded(
+                      child: UrlIconButton(
+                    title: 'Article source',
+                    imageUrl: 'assets/images/read article.svg',
+                    link: launch.articleSoruce,
+                  )),
+                ],
+              ),
+              UrlIconButton(
+                title: 'Wikipedia source',
+                imageUrl: 'assets/images/wikipedia copy.svg',
+                link: launch.wikipediaSource,
+              ),
+            ],
+          ),
         ),
       ),
     );
