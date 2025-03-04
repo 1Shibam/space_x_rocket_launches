@@ -14,11 +14,12 @@ final rocketDataBaseProvider = FutureProvider<Database>((ref) async {
       rocketsDatabase.execute('''
     CREATE TABLE rocketsTable(
     rocketID INTEGER PRIMARY KEY AUTOINCREMENT,
-    rocket TEXT,
+    id TEXT,
     rocketName TEXT,
     activeStatus INTEGER DEFAULT 0,
     costPerLaunch INTEGER,
     successRate INTEGER,
+    firstLaunch TEXT,
     country TEXT,
     wikipediaSource TEXT,
     description TEXT,
@@ -34,22 +35,3 @@ final rocketDataBaseProvider = FutureProvider<Database>((ref) async {
     },
   );
 });
-
-/*
-rocketID: map['rocketID'] as int?,
-        rocketName: map[''],
-        activeStatus: map[''],
-        costPerLaunch: map[''],
-        successRate: map[''],
-        firstLaunch: map[''],
-        country: map[''],
-        wikipediaSource: map[''],
-        description: map[''],
-
-        heightInMeters: map[''],
-        heightInFeets: map[''],
-        diameterInMeter: map[''],
-        diameterInFeets: map[''],
-        massInKg: map[''],
-        massInLbs: map['']);
- */

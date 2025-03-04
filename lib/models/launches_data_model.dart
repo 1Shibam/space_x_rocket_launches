@@ -9,7 +9,7 @@ class LaunchesDataModel {
   final String articleSoruce;
   final String wikipediaSource;
   final String missionName;
-  final String rocket;
+  final String id;
   final String landingDate;
   final bool successStatus;
 
@@ -20,7 +20,7 @@ class LaunchesDataModel {
       required this.articleSoruce,
       required this.wikipediaSource,
       required this.missionName,
-      required this.rocket,
+      required this.id,
       required this.landingDate,
       required this.successStatus});
 
@@ -32,7 +32,7 @@ class LaunchesDataModel {
         articleSoruce: json['links']['article'] ?? '',
         wikipediaSource: json['links']["wikipedia"] ?? '',
         missionName: json['name'] ?? '',
-        rocket: json['rocket'] ?? '',
+        id: json['rocket'] ?? '',
         landingDate: json['date_utc'] ?? '',
         successStatus: json['success'] ?? false);
   }
@@ -45,10 +45,24 @@ class LaunchesDataModel {
         articleSoruce: map['articleSoruce'],
         wikipediaSource: map['wikipediaSource'],
         missionName: map['missionName'],
-        rocket: map['rocket'],
+        id: map['id'],
         landingDate: map['landingDate'],
-        successStatus: map['successStatus']);
+        successStatus: map['successStatus'] == 1 );
   }
+  Map<String, dynamic> toDBMap() {
+    return {
+      //? not giving launchID as its set to AUTOINCREMENT and can be passed as null - 
+      'flightNumber' : flightNumber,
+      'videoSource' : videoSource,
+      'articleSoruce': articleSoruce,
+      'wikipediaSource': wikipediaSource,
+      'missionName': missionName,
+      'id': id,
+      'landingDate': landingDate,
+      'successStatus' : successStatus ? 1: 0
+    };
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'flight_number': flightNumber,
@@ -56,7 +70,7 @@ class LaunchesDataModel {
       'article': articleSoruce,
       'wikipedia': wikipediaSource,
       'name': missionName,
-      'rocket': rocket,
+      'rocket': id,
       'date_utc': landingDate,
       'success': successStatus
     };

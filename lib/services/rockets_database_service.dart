@@ -23,7 +23,7 @@ class RocketsDatabaseService {
     try {
       final rockets = await database.query('rocketsTable');
       return rockets
-          .map((data) => RocketsDataModel.fromDataBaseMap(data))
+          .map((data) => RocketsDataModel.fromDBMap(data))
           .toList();
     } catch (error, stackTrace) {
       debugPrint('Error fetching list of rocket - $error');

@@ -17,10 +17,10 @@ final launchesDatabaseProvider = FutureProvider<Database>((ref) async {
       launchID INTEGER PRIMARY KEY AUTOINCREMENT,
       flightNumber INTEGER,
       videoSource TEXT,
-      articleSource TEXT,
+      articleSoruce TEXT,
       wikipediaSource TEXT,
       missionName TEXT,
-      rocket TEXT,
+      id TEXT,
       landingDate TEXT,
       successStatus INTEGER DEFAULT 0
       )
@@ -28,5 +28,3 @@ final launchesDatabaseProvider = FutureProvider<Database>((ref) async {
     },
   );
 });
-
-

@@ -50,16 +50,17 @@ class RocketsDataModel {
         country: json['country'] ?? '',
         wikipediaSource: json['wikipedia'] ?? '',
         description: json['description'] ?? '',
-        heightInMeters: (json['height']['meters'] as num?)?.toDouble() ?? 0,
-        heightInFeets: (json['height']['feet'] as num?)?.toDouble() ?? 0,
-        diameterInMeter: (json['diameter']['meters'] as num?)?.toDouble() ?? 0,
-        diameterInFeets: (json['diameter']['feet'] as num?)?.toDouble() ?? 0,
-        massInKg: (json['mass']['kg'] as num?)?.toDouble() ?? 0,
-        massInLbs: (json['mass']['lb'] as num?)?.toDouble() ?? 0);
+        heightInMeters: (json['height']['meters'] as num?)?.toDouble() ?? 0.0,
+        heightInFeets: (json['height']['feet'] as num?)?.toDouble() ?? 0.0,
+        diameterInMeter:
+            (json['diameter']['meters'] as num?)?.toDouble() ?? 0.0,
+        diameterInFeets: (json['diameter']['feet'] as num?)?.toDouble() ?? 0.0,
+        massInKg: (json['mass']['kg'] as num?)?.toDouble() ?? 0.0,
+        massInLbs: (json['mass']['lb'] as num?)?.toDouble() ?? 0.0);
   }
   Map<String, dynamic> toJson() {
     return {
-      'id' : id,
+      'id': id,
       'name': rocketName,
       'active': activeStatus,
       'cost_per_launch': costPerLaunch,
@@ -73,4 +74,46 @@ class RocketsDataModel {
       'mass': {'kg': massInKg, 'lb': massInLbs}
     };
   }
+
+  //From DB method -
+  factory RocketsDataModel.fromDBMap(Map<String, dynamic> map) {
+    return RocketsDataModel(
+        rocketID: map['rocketID'] as int?,
+        id: map['id'],
+        rocketName: map['rocketName'],
+        activeStatus: map['activeStatus'] == 1,
+        costPerLaunch: map['costPerLaunch'],
+        successRate: map['successRate'],
+        firstLaunch: map['firstLaunch'],
+        country: map['country'],
+        wikipediaSource: map['wikipediaSource'],
+        description: map['description'],
+        heightInMeters: map['heightInMeters'],
+        heightInFeets: map['heightInFeets'],
+        diameterInMeter: map['diameterInMeter'],
+        diameterInFeets: map['diameterInFeets'],
+        massInKg: map['massInKg'],
+        massInLbs: map['massInLbs']);
+  }
+
+  //to db map method -
+  Map<String, dynamic> toDBMap() {
+    return {
+      'id' : id,
+      'rocketName': rocketName,
+      'activeStatus' : activeStatus ? 1:0,
+      'costPerLaunch' : costPerLaunch,
+      'firstLaunch': firstLaunch,
+      'country' : country,
+      'wikipediaSource' : wikipediaSource,
+      'description': description,
+      'heightInMeters' : heightInMeters,
+      'heightInFeets' : heightInFeets,
+      'diameterInMeter': diameterInMeter,
+      'diameterInFeets': diameterInFeets,
+      'massInKg': massInKg,
+      'massInLbs' : massInLbs
+    };
+  }
 }
+
