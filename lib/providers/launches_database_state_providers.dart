@@ -41,3 +41,7 @@ class LaunchesDatabaseStateNotifier
     state = AsyncValue.data(updatedLaunches);
   }
 }
+
+final launchesDatabaseStateNotifierProvider = StateNotifierProvider<
+        LaunchesDatabaseStateNotifier, AsyncValue<List<LaunchesDataModel>>>(
+    (ref) => LaunchesDatabaseStateNotifier(ref));

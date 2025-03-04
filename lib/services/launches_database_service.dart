@@ -11,7 +11,8 @@ class LaunchesDatabaseService {
   //? adds the launches data to db
   Future<void> addLaunchesToDB(LaunchesDataModel launch) async {
     try {
-      await database.insert('launchesTable', launch.toJson(),
+      print('tried to add to launch db - ${launch.toDBMap()}');
+      await database.insert('launchesTable', launch.toDBMap(),
           conflictAlgorithm: ConflictAlgorithm.replace);
     } catch (error, stackTrace) {
       debugPrint('Error adding the laucnhes - $error');
@@ -22,6 +23,7 @@ class LaunchesDatabaseService {
 
   //? Fetches the list of launches saved in the database
   Future<List<LaunchesDataModel>> getListOfLaunchesFromDB() async {
+    print('i got updated my guy hehe!!');
     try {
       final List<Map<String, dynamic>> launches =
           await database.query('launchesTable');

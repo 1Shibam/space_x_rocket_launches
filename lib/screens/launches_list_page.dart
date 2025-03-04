@@ -65,8 +65,7 @@ class LaunchesListPage extends StatelessWidget {
                                             MaterialPageRoute(
                                               builder: (context) =>
                                                   LaunchesDetailScreen(
-                                                      launchesDataModel:
-                                                          singleLaunch),
+                                                      launch: singleLaunch),
                                             ));
                                       },
                                       title: 'Mission name',
